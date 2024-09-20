@@ -20,4 +20,7 @@
             echo "fail";
         }
     }
+    else if(isset($_REQUEST['thongkethang'])){
+        echo 'cmm';
+    }
 ?>

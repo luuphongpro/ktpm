@@ -144,6 +144,21 @@ class banhang
         $this->conn->disconnect();
         return $result;
     }
+    function thongkethang(){
+        $this->conn->constructor();
+        $sql="SELECT 
+                (MONTH(NgayDatHang)) AS month, 
+                SUM(TongGiaTriDonHang) AS total
+            FROM
+                donhang
+            WHERE 
+                TrangThaiDonHang = '1' 
+                AND YEAR(NgayDatHang) = YEAR(CURDATE()) -- Điều kiện chỉ lấy trong năm hiện tại
+            GROUP BY MONTH(NgayDatHang); -- Nhóm theo tháng";
+        $result = $this->conn->excuteSQL($sql);
+        $this->conn->disconnect();
+        return $result;
+    }
 }
 class taikhoan
 {
