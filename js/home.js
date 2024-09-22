@@ -36,7 +36,7 @@ Validator({
         if(value){
             console.log(value)
             xhr=new XMLHttpRequest();
-            xhr.open('POST','./pages/module/xldangnhap.php');
+            xhr.open('POST','./backend/controllers/xldangnhap.php');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send('user_login='+value.user_login+'&password_login='+value.password_login);
             xhr.onload = function () {
@@ -82,7 +82,7 @@ Validator({
     onSubmit: (value) =>{
         const data=JSON.stringify(value);
         xhr=new XMLHttpRequest();
-        xhr.open('POST','./pages/module/taikhoan.php?them');
+        xhr.open('POST','./backend/controllers/taikhoan.php?them');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send('dataJSON='+data);
         xhr.onload = function () {
@@ -128,7 +128,7 @@ function AddCart(id,soluong=1){
     soluong=Number($(".input-qty").val()) || 1;
     if(userlogin?.flag){
         var xhr=new XMLHttpRequest;
-        xhr.open("GET","./pages/module/sanpham.php?get&id="+id)
+        xhr.open("GET","./backend/controllers/sanpham.php?get&id="+id)
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send();
         xhr.onload=function(){

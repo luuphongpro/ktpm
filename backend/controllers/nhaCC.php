@@ -1,7 +1,8 @@
 <?php  
-    include './controller.php';
+    include '../models/nhacungcap.php';
+    include '../models/donhang.php';
     $nhacc=new nhacungcap;
-    $hoadon=new donhang;
+    $donhang=new donhang;
     if(isset($POST['data'])){
         $data=$_POST['data']; 
         $data=json_decode($data); 
@@ -37,7 +38,7 @@
         // return $result;
     }
     else if(isset($_REQUEST['hoadon'])){
-        $result = $hoadon->thongkethang();
+        $result = $donhang->thongkethang();
         $currentMonth = intval(date('n')); // Lấy tháng hiện tại, chuyển về dạng số nguyên (từ 1 đến 12)
         $array = array_fill(0, $currentMonth, 0); // Tạo mảng gồm các tháng từ 1 đến tháng hiện tại, tất cả có giá trị ban đầu là 0
         if(mysqli_num_rows($result) > 0){

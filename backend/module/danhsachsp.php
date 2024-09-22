@@ -15,7 +15,7 @@
             </thead>
             <tbody>
                 <?php
-                include 'controller.php';
+                include '../models/sanpham.php';
 
                 $sanpham = new sanpham;
                 $result = $sanpham->danhsachsp();

@@ -35,7 +35,7 @@ else if (currentLogin.quyen == 'QLK') {
 var dataThongKe=[]
 function GetValue(){
     var xhr=new XHR()
-    return xhr.connect(undefined,"./pages/module/nhaCC.php?hoadon")
+    return xhr.connect(undefined,"./backend/controllers/nhaCC.php?hoadon")
     .then(function(data){
         console.log(data)
         dataThongKe=JSON.parse(data)
@@ -189,13 +189,13 @@ function qlkho() {
         $(".model-item.active").removeClass("active")
         if (e.target.innerText == "Danh sách sản phẩm") {
             $(this).addClass("active")
-            $(".model-content-kho").load("pages/module/danhsachsp.php", function () {
+            $(".model-content-kho").load("backend/module/danhsachsp.php", function () {
                 new DataTable('#dataTable');
                 $("#search").keypress(function (e) {
                     e.stopPropagation()
                     if (e.key = "Enter") {
                         xhr = new XMLHttpRequest();
-                        xhr.open("POST", "./pages/module/sanpham.php")
+                        xhr.open("POST", "./backend/module/sanpham.php")
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.send("data=" + $(this).val())
                         xhr.onload = function () {
@@ -225,7 +225,7 @@ function xoasanpham(masp,soluong) {
     const flag = confirm("Bạn có chắc muốn xóa sản phẩm này không?")
     if (flag) {
         xhr = new XMLHttpRequest();
-        xhr.open("GET", "./pages/module/sanpham.php?xoa=" + masp)
+        xhr.open("GET", "./backend/controllers/sanpham.php?xoa=" + masp)
         xhr.send()
         xhr.onload = function () {
             if (xhr.status >= 200 && xhr.status < 300) {
@@ -235,7 +235,7 @@ function xoasanpham(masp,soluong) {
     }
 }
 function suasanpham(masp) {
-    $(".model-content-kho").load("./pages/module/loadsp.php?maSP=" + masp, function () {
+    $(".model-content-kho").load("./backend/module/loadsp.php?maSP=" + masp, function () {
         $("#btn-register").removeClass("btn-default")
         Validator({
             form: "#form-sua",
@@ -253,7 +253,7 @@ function suasanpham(masp) {
                 var formData = new FormData(form);
 
                 var xhfile = new XMLHttpRequest();
-                xhfile.open("POST", "./pages/module/upload.php?id=" + masp);
+                xhfile.open("POST", "./backend/module/upload.php?id=" + masp);
 
                 xhfile.onreadystatechange = function () {
                     if (xhfile.readyState == XMLHttpRequest.DONE) {
@@ -269,7 +269,7 @@ function suasanpham(masp) {
                 xhfile.send(formData);
                 //Luồng gửi form
                 xhr = new XMLHttpRequest();
-                xhr.open('POST', './pages/module/sanpham.php?suasp');
+                xhr.open('POST', './backend/module/sanpham.php?suasp');
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 value['MaSP'] = masp;
                 xhr.send("dataJSON=" + JSON.stringify(value))
@@ -278,7 +278,7 @@ function suasanpham(masp) {
                         console.log(xhr.responseText)
                         if (xhr.responseText > 0) {
                             alert("Sửa thành công");
-                            $(".model-content-kho").load("pages/module/danhsachsp.php")
+                            $(".model-content-kho").load("backend/module/danhsachsp.php")
                         }
                     }
                     // console.log(value);
@@ -302,13 +302,13 @@ function qlncc() {
         $(".model-item.active").removeClass("active")
         if (e.target.innerText == "Danh sách nhà cung cấp") {
             $(this).addClass("active")
-            $(".model-content-nhacc").load("pages/module/nhacungcap.php", function () {
+            $(".model-content-nhacc").load("backend/module/nhacungcap.php", function () {
                 new DataTable('#dataTable');
                 $("#search").keypress(function (e) {
                     e.stopPropagation()
                     if (e.key = "Enter") {
                         xhr = new XMLHttpRequest();
-                        xhr.open("POST", "./pages/module/nhacungcap.php")
+                        xhr.open("POST", "./backend/module/nhacungcap.php")
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.send("data=" + $(this).val())
                         xhr.onload = function () {
@@ -334,9 +334,9 @@ var dataCTPN = [];
 function nhapkho() {
     // $(".model-right.active").removeClass("active")
     // $(".model-qlkho").addClass("active")
-    $(".content-wrapper").load("./pages/nhapkho.php", function () {
+    $(".content-wrapper").load("./backend/nhapkho.php", function () {
         new DataTable('#table_nhapkho-sanpham');
-        $.get("./pages/module/phieunhap.php?row", function (data, status) {
+        $.get("./backend/module/phieunhap.php?row", function (data, status) {
             dataPhieuNhap['maPhieuNhap'] = Number(data) + 1;
         });
         dataPhieuNhap['tongTien'] = 0;
@@ -464,7 +464,7 @@ function thongkenhap() {
         $(".model-item.active").removeClass("active")
         if (e.target.innerText == "Danh sách phiếu nhập") {
             $(this).addClass("active")
-            $(".model-content-kho").load("./pages/thongkephieunhap.php", function () {
+            $(".model-content-kho").load("./backend/thongkephieunhap.php", function () {
             })
         }
 
@@ -488,7 +488,7 @@ function handleLuuPhieu(flag) {
     function luu() {
         dataPhieuNhap['maNhaCC'] = $("#form_phieunhap-nhacc").val()
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "./pages/module/phieunhap.php")
+        xhr.open("POST", "./backend/module/phieunhap.php")
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.send("phieunhap=" + JSON.stringify(dataPhieuNhap) + "&chitietphieunhap=" + JSON.stringify(dataCTPN))
         dataCTPN=[];
@@ -500,13 +500,13 @@ function handleLuuPhieu(flag) {
     }
 }
 function xemchitietnhap(id) {
-    $(".table-content").load("./pages/chitietnhap.php?id=" + id)
+    $(".table-content").load("./backend/chitietnhap.php?id=" + id)
 }
 function xoanhacc(mancc) {
     const flag = confirm("Bạn có chắc muốn xóa nhà cung cấp này không?")
     if (flag) {
         xhr = new XMLHttpRequest();
-        xhr.open("GET", "./pages/module/nhaCC.php?xoanhacc=" + mancc)
+        xhr.open("GET", "./backend/module/nhaCC.php?xoanhacc=" + mancc)
         xhr.send()
         xhr.onload = function () {
             if (xhr.status >= 200 && xhr.status < 300) {
@@ -526,7 +526,7 @@ function ClickTrangChu() {
 function qlTaiKhoan() {
     // $(".model-right.active").removeClass("active")
     // $(".model-tk").addClass("active")
-    $(".content-wrapper").load("./pages/admin/qltaikhoan.php", function () {
+    $(".content-wrapper").load("./backend/admin/qltaikhoan.php", function () {
         RenderTableAccount()
         $(".js_search_tk").on("input", function (e) {
             SearchTaiKhoan(e)
@@ -536,16 +536,16 @@ function qlTaiKhoan() {
     //     $(".model-item.active").removeClass("active")
     //     if (e.target.innerText == "Thêm tài khoản") {
     //         $(this).addClass("active")
-    //         $(".model-content-qltk").load("./pages/themtk.php")
+    //         $(".model-content-qltk").load("./backend/themtk.php")
     //     }
     //     else if (e.target.innerText == "Sửa tài khoản") {
     //         $(this).addClass("active")
     //         console.log("cmm")
-    //         $(".model-content-qltk").load("./pages/timtk.php?status=1")
+    //         $(".model-content-qltk").load("./backend/timtk.php?status=1")
     //     }
     //     else if (e.target.innerText == "Xóa tài khoản") {
     //         $(this).addClass("active")
-    //         $(".model-content-qltk").load("./pages/timtk.php?status=2")
+    //         $(".model-content-qltk").load("./backend/timtk.php?status=2")
     //     }
     // })
 }
@@ -564,13 +564,13 @@ function duyetdonhang() {
         $(".model-item.active").removeClass("active");
         if (e.target.innerText == "Danh sách đơn hàng") {
             $(this).addClass("active");
-            $(".model-content-hd").load("./pages/module/loaddon.php", function () {
+            $(".model-content-hd").load("./backend/module/loaddon.php", function () {
                 viewDuyet();
             })
         }
         else if (e.target.innerText == "Lọc danh sách đơn hàng chưa duyệt") {
             $(this).addClass("active");
-            $(".table-content").load("./pages/module/loaddon.php?status=0", function () {
+            $(".table-content").load("./backend/module/loaddon.php?status=0", function () {
                 viewDuyet();
             })
         }
@@ -592,9 +592,9 @@ function viewDuyet() {
         inHoaDon($(this).attr("id_i"));
     })
     $("tr").click(function () {
-        $(".table-content").load("./pages/module/loaddon.php?id=" + $(this).attr("id") + "&chon=xem", function () {
+        $(".table-content").load("./backend/module/loaddon.php?id=" + $(this).attr("id") + "&chon=xem", function () {
             $(".btn-loaddon").click(function () {
-                $(".table-content").load("./pages/module/loaddon.php", function () {
+                $(".table-content").load("./backend/module/loaddon.php", function () {
                     viewDuyet();
                 })
             })
@@ -603,7 +603,7 @@ function viewDuyet() {
 }
 function handleDuyet(id) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "./pages/module/loaddon.php?id=" + id + "&chon=capnhat");
+    xhr.open("GET", "./backend/module/loaddon.php?id=" + id + "&chon=capnhat");
     xhr.send();
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
@@ -617,13 +617,13 @@ function handleDuyet(id) {
     }
 }
 function inHoaDon(id) {
-    $(".table-content").load("./pages/module/xlinhoadon.php?donhang&id=" + id, function () {
+    $(".table-content").load("./backend/module/xlinhoadon.php?donhang&id=" + id, function () {
         $(".print-pdf").click(function (e) {
             e.stopPropagation();
             window.open("./hoadon.php?donhang&id=" + id);
         })
         $(".btn-loaddon").click(function () {
-            $(".table-content").load("./pages/module/loaddon.php", function () {
+            $(".table-content").load("./backend/module/loaddon.php", function () {
                 viewDuyet();
             });
         });
@@ -633,12 +633,12 @@ function handTimeDon() {
     var from = $("#from-time").val();
     var to = $("#to-time").val();
     if ($(".model-item.active").text().trim() == "Danh sách đơn hàng") {
-        $(".model-content-hd").load("./pages/module/loaddon.php?from=" + from + "&to=" + to, function () {
+        $(".model-content-hd").load("./backend/module/loaddon.php?from=" + from + "&to=" + to, function () {
             viewDuyet();
         })
     }
     else {
-        $(".model-content-hd").load("./pages/module/loaddon.php?status=0&from=" + from + "&to=" + to, function () {
+        $(".model-content-hd").load("./backend/module/loaddon.php?status=0&from=" + from + "&to=" + to, function () {
             viewDuyet();
         })
     }
@@ -646,7 +646,7 @@ function handTimeDon() {
 function timdonhang(event) {
 
     if (event.key == "Enter") {
-        $.post("./pages/module/loaddon.php?timdon",
+        $.post("./backend/module/loaddon.php?timdon",
             {
                 SDT: $(".search-donhang").val(),
             },
@@ -674,7 +674,7 @@ function xemThongKe() {
         switch (e.target.innerText) {
             case "Thống kê lợi nhuận":
                 const chartE=document.getElementById('thongkeChart')
-                const data_danh_thu=$.get('./pages/module/donhang.php?thongkethang')
+                const data_danh_thu=$.get('./backend/module/donhang.php?thongkethang')
                 let myChart;
                 const labels = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7']; // Thời gian (các tháng)
 
@@ -750,7 +750,7 @@ function xemThongKe() {
                 var day = date.getDate().toString().padStart(2, '0');
                 var formattedDate = year + '-' + month + '-' + day;
                 $(this).addClass("active")
-                $(".model-content-tkbh").load("./pages/thongkeban.php?day=" + formattedDate)
+                $(".model-content-tkbh").load("./backend/thongkeban.php?day=" + formattedDate)
                 break;
             case "Báo cáo theo khoảng thời gian":
                 $(this).addClass("active")
@@ -764,7 +764,7 @@ function xemThongKe() {
 function handTimeTK() {
     var from = $("#from-time-tk").val();
     var to = $("#to-time-tk").val();
-    $(".baocao").load("./pages/thongkeban.php?khoang&from=" + from + "&to=" + to, function () {
+    $(".baocao").load("./backend/thongkeban.php?khoang&from=" + from + "&to=" + to, function () {
     })
 }
 function ModalThongBao(tittle, message, status = 'success') {

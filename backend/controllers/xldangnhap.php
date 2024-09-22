@@ -1,5 +1,5 @@
 <?php 
-    include './controller.php';
+    include_once '../models/taikhoan.php';
     $taikhoan=new taikhoan;
     $ussename=$_REQUEST['user_login'];
     $passpwd=$_REQUEST['password_login'];

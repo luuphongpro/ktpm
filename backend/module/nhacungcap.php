@@ -14,7 +14,7 @@
             </thead>
             <tbody>
                 <?php
-                include 'controller.php';
+                include '../../backend/models/nhacungcap.php';
 
                 $sanpham = new nhacungcap;
                 $result = $sanpham->dsnhacc();

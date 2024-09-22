@@ -1,5 +1,5 @@
 <?php 
-    include './controller.php';
+    include './taikhoan.php';
     $taikhoan=new taikhoan;
     $data = json_decode($_POST['jsonData'], true);
     $result=$taikhoan->timtk($data['user1_register']);

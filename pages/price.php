@@ -1,6 +1,7 @@
 <?php 
-    include 'module/danhmuc.php';
-    $danhmuc=getDanhMuc();
+    include '../backend/models/danhmuc.php';
+    $danhmuc=new danhmuc();
+    $data=$danhmuc->get_danh_muc();
 ?>
 <!-- Form lọc theo giá -->
         <form id="price_sp">
