@@ -189,7 +189,7 @@ function qlkho() {
         $(".model-item.active").removeClass("active")
         if (e.target.innerText == "Danh sách sản phẩm") {
             $(this).addClass("active")
-            $(".model-content-kho").load("backend/module/danhsachsp.php", function () {
+            $(".model-content-kho").load("backend/modules/danhsachsp.php", function () {
                 new DataTable('#dataTable');
                 $("#search").keypress(function (e) {
                     e.stopPropagation()
@@ -278,7 +278,7 @@ function suasanpham(masp) {
                         console.log(xhr.responseText)
                         if (xhr.responseText > 0) {
                             alert("Sửa thành công");
-                            $(".model-content-kho").load("backend/module/danhsachsp.php")
+                            $(".model-content-kho").load("backend/modules/danhsachsp.php")
                         }
                     }
                     // console.log(value);
@@ -302,13 +302,13 @@ function qlncc() {
         $(".model-item.active").removeClass("active")
         if (e.target.innerText == "Danh sách nhà cung cấp") {
             $(this).addClass("active")
-            $(".model-content-nhacc").load("backend/module/nhacungcap.php", function () {
+            $(".model-content-nhacc").load("backend/modules/nhacungcap.php", function () {
                 new DataTable('#dataTable');
                 $("#search").keypress(function (e) {
                     e.stopPropagation()
                     if (e.key = "Enter") {
                         xhr = new XMLHttpRequest();
-                        xhr.open("POST", "./backend/module/nhacungcap.php")
+                        xhr.open("POST", "./backend/modules/nhacungcap.php")
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.send("data=" + $(this).val())
                         xhr.onload = function () {
@@ -334,9 +334,9 @@ var dataCTPN = [];
 function nhapkho() {
     // $(".model-right.active").removeClass("active")
     // $(".model-qlkho").addClass("active")
-    $(".content-wrapper").load("./backend/nhapkho.php", function () {
+    $(".content-wrapper").load("./backend/modules/nhapkho.php", function () {
         new DataTable('#table_nhapkho-sanpham');
-        $.get("./backend/module/phieunhap.php?row", function (data, status) {
+        $.get("./backend/controllers/phieunhap.php?row", function (data, status) {
             dataPhieuNhap['maPhieuNhap'] = Number(data) + 1;
         });
         dataPhieuNhap['tongTien'] = 0;
@@ -464,7 +464,7 @@ function thongkenhap() {
         $(".model-item.active").removeClass("active")
         if (e.target.innerText == "Danh sách phiếu nhập") {
             $(this).addClass("active")
-            $(".model-content-kho").load("./backend/thongkephieunhap.php", function () {
+            $(".model-content-kho").load("./backend/modules/thongkephieunhap.php", function () {
             })
         }
 
@@ -488,7 +488,7 @@ function handleLuuPhieu(flag) {
     function luu() {
         dataPhieuNhap['maNhaCC'] = $("#form_phieunhap-nhacc").val()
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "./backend/module/phieunhap.php")
+        xhr.open("POST", "./backend/controllers/phieunhap.php")
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.send("phieunhap=" + JSON.stringify(dataPhieuNhap) + "&chitietphieunhap=" + JSON.stringify(dataCTPN))
         dataCTPN=[];
@@ -500,13 +500,13 @@ function handleLuuPhieu(flag) {
     }
 }
 function xemchitietnhap(id) {
-    $(".table-content").load("./backend/chitietnhap.php?id=" + id)
+    $(".table-content").load("./backend/modules/chitietnhap.php?id=" + id)
 }
 function xoanhacc(mancc) {
     const flag = confirm("Bạn có chắc muốn xóa nhà cung cấp này không?")
     if (flag) {
         xhr = new XMLHttpRequest();
-        xhr.open("GET", "./backend/module/nhaCC.php?xoanhacc=" + mancc)
+        xhr.open("GET", "./backend/controllers/nhaCC.php?xoanhacc=" + mancc)
         xhr.send()
         xhr.onload = function () {
             if (xhr.status >= 200 && xhr.status < 300) {
@@ -526,7 +526,7 @@ function ClickTrangChu() {
 function qlTaiKhoan() {
     // $(".model-right.active").removeClass("active")
     // $(".model-tk").addClass("active")
-    $(".content-wrapper").load("./backend/admin/qltaikhoan.php", function () {
+    $(".content-wrapper").load("./pages/admin/qltaikhoan.php", function () {
         RenderTableAccount()
         $(".js_search_tk").on("input", function (e) {
             SearchTaiKhoan(e)
@@ -805,7 +805,36 @@ function ModalThongBao(tittle, message, status = 'success') {
         })
     });
 }
+function suanhacc(mancc) {
+    $(".model-content-nhacc").load("./backend/modules/loadncc.php?MaNCC=" + mancc, function () {
+        $("#btn-register").removeClass("btn-default")
+        Validator({
+            form: "#form-sua",
+            rules: [
+                Validator.isRequired("#DiaChi"),
+                Validator.isRequired("#Email"),
+                Validator.isRequired("#SoDienThoai"),
+            ],
+            onSubmit: function(value){
+                xhr=new XMLHttpRequest();
+                xhr.open('POST','./backend/controllers/nhaCC.php?suanhacc');
+                xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+                value['MaNCC']=mancc;
+                xhr.send("dataJSON="+JSON.stringify(value))
+                xhr.onload=function(){
+                    if(xhr.status>=200 && xhr.status<300){
+                        console.log(xhr.responseText)
+                        if(xhr.responseText>0){
+                            alert("Sửa thành công");
+                            $(".model-content-nhacc").load("backend/modules/nhacungcap.php");
+                    }
+                    }
+                }
+            }
+        })
+    });
 
+}
 function CloseModal() {
     var modal = document.getElementById('myModal');
     if (modal) {

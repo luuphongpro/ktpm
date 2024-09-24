@@ -55,14 +55,14 @@
             console.log(value);
             var data = JSON.stringify(value);
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "./pages/module/nhaCC.php?them");
+            xhr.open("POST", "./backend/controllers/nhaCC.php?them");
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("dataJSON=" + data);
             xhr.onload = function() {
                 if (xhr.status >= 200 && xhr.status < 300) {
-                    console.log(xhr.responseText);
                         alert("Tạo nhà cung cấp thành công")
                         $(".model-content").load("./pages/themncc.php")
+                        
                 }
             }
         }

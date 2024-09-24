@@ -12,7 +12,7 @@
   <tbody>
     <tr>
       <?php 
-        include './module/controller.php';
+        include '../models/phieunhap.php';
         $phieunhap=new phieunhap;
         $result=$phieunhap->DSPhieuNhap();
         if(mysqli_num_rows($result)>0){

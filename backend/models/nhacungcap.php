@@ -1,9 +1,5 @@
 <?php
 include_once 'connect.php';
-
-
-
-
 class nhacungcap {
     private $conn;
     function __construct()

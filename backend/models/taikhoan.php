@@ -39,12 +39,14 @@ class taikhoan
         $strSQL = "UPDATE `taikhoan` 
         SET `UserName`='" . $data->UserName . "',`MatKhau`='" . $data->MatKhau . "'WHERE SDT='" . $data->SDT . "'";
         $result = $this->conn->excuteSQL($strSQL);
+        $this->conn->disconnect();
         return $result;
     }
     function suaquyen($data){
         $this->conn->constructor();
         $strSQL="UPDATE `taikhoan` SET `TenNhomQuyen`='".$data->quyen."' WHERE `SDT`='".$data->user1_register."'";
         $result=$this->conn->excuteSQL($strSQL);
+        $this->conn->disconnect();
         return $result;
     }
     function dstaikhoan(){

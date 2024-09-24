@@ -1,11 +1,11 @@
 var dataAccount=[]
 function GetValue(){
     var xhr=new XHR()
-    return xhr.connect(undefined,"./pages/module/taikhoan.php?get")
+    return xhr.connect(undefined,"./backend/controllers/taikhoan.php?get")
 }
 function SetValue(value){
     var xhr=new XHR()
-    return xhr.connect("POST","./pages/module/taikhoan.php?update",value)
+    return xhr.connect("POST","./backend/controllers/taikhoan.php?update",value)
 }
 function RenderTableAccount(data=false){
     var html=''
@@ -101,7 +101,7 @@ function SubmitFormThem(){
         onSubmit: function(value){
             console.log(value)
             var xhr=new XHR()
-            return xhr.connect("POST","./pages/module/taikhoan.php?them",value)
+            return xhr.connect("POST","./backend/controllers/taikhoan.php?them",value)
             .then(function(data){
                 console.log(data)
                 if(data=='success'){
@@ -136,7 +136,7 @@ function SubmitFormSua(sdt){
             value['SDT']=sdt
             console.log(value)
             var xhr=new XHR()
-            return xhr.connect("POST","./pages/module/taikhoan.php?update",value)
+            return xhr.connect("POST","./backend/controllers/taikhoan.php?update",value)
             .then(function(){
                 alert("Sửa thông tin tài khoản thành công")
                 RenderTableAccount()
@@ -151,7 +151,7 @@ function XoaTaiKhoan(sdt,e){
     if(choice){
         var xhr=new XHR()
         $(e.target).parent().parent().remove()
-        return xhr.connect("GET","./pages/module/taikhoan.php?delete&SDT="+sdt)
+        return xhr.connect("GET","./backend/controllers/taikhoan.php?delete&SDT="+sdt)
             .then(function(){
                 alert("Xóa tài khoản thành công")
             })

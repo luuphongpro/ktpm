@@ -1,5 +1,5 @@
 <?php 
-    include 'taikhoan.php';
+    include '../models/taikhoan.php';
     $taikhoan=new taikhoan;
     if(isset($_REQUEST['them'])){
         $data=json_decode($_POST['dataJSON']);
@@ -32,20 +32,16 @@
     else if(isset($_REQUEST['update'])){
         $data=json_decode($_POST['dataJSON']);
         $result=$taikhoan->suatk($data);
-        if(mysqli_num_rows($result) >0){
-            echo 1;
-        }
+        echo $result;
     }
     else if(isset($_REQUEST['xoa'])){
         $data=$_REQUEST['SDT'];
         $result=$taikhoan->xoatk($data);
-        if(mysqli_num_rows($result)>=0){
-            echo 1;
-        }
+        echo $result;
     }
     else if(isset($_REQUEST['suaquyen'])){
         $data=$_REQUEST['data'];
-        $data=json_decode($data);
+        $data=json_decode(json: $data);
         $result=$taikhoan->suaquyen($data);
         echo $result;
     }
