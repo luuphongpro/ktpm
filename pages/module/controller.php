@@ -155,6 +155,7 @@ class banhang
                 TrangThaiDonHang = '1' 
                 AND YEAR(NgayDatHang) = YEAR(CURDATE()) -- Điều kiện chỉ lấy trong năm hiện tại
             GROUP BY MONTH(NgayDatHang); -- Nhóm theo tháng";
+
         $result = $this->conn->excuteSQL($sql);
         $this->conn->disconnect();
         return $result;
@@ -239,7 +240,8 @@ class danhmuc {
         return $result;
     }
 }
-class phieunhap{
+class phieunhap
+{
     private $conn;
     function __construct(){
         $this->conn=new connect;
@@ -292,6 +294,17 @@ class phieunhap{
         $result=$this->conn->excuteSQL($strSQL);
         $this->conn->disconnect();
         return $result;
+    }
+    function thongkethang(){
+        $this->conn->constructor();
+        $strSQL="SELECT MONTH(ngayLap) AS month, 
+                    SUM(tongTien) AS total
+                FROM phieunhap
+                WHERE YEAR(ngayLap) = YEAR(CURDATE())
+                GROUP BY MONTH(ngayLap);";
+        $result=$this->conn->excuteSQL($strSQL);
+        $this->conn->disconnect();
+        return $result;   
     }
 }
 class donhang{

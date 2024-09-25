@@ -65,7 +65,6 @@ function ChartNe() {
         }
         return s.join(dec);
     }
-    console.log(dataThongKe)
     var ctx = document.getElementById('myChart').getContext('2d');
     var myLineChart = new Chart(ctx, {
         type: 'line',
@@ -656,110 +655,163 @@ function timdonhang(event) {
             });
     }
 }
-function xemThongKe() {
-    // $(".model-right.active").removeClass("active")
-    // $(".model-thongke").addClass("active")
-    $(".content-wrapper").html(` <div class="top-menu">
-    <ul class="list-group list-group-horizontal menu-container">
-        <li class="list-group-item model-item">Thống kê lợi nhuận</li>
-        <li class="list-group-item model-item">Báo cáo theo khoảng thời gian</li>
-    </ul>
-    </div>
-    <div class="model-content-tkbh mt-5 m-2">
-        <canvas id="thongkeChart"></canvas>
-
-    </div>`)
-    $(".model-item").click(function (e) {
-        $(".model-item.active").removeClass("active")
-        switch (e.target.innerText) {
-            case "Thống kê lợi nhuận":
-                const chartE=document.getElementById('thongkeChart')
-                const data_danh_thu=$.get('./pages/module/donhang.php?thongkethang')
-                let myChart;
-                const labels = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7']; // Thời gian (các tháng)
-
-                const data = {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Doanh Thu',
-                            data: [65000, 59000, 80000, 81000, 56000, 55000, 40000], // Dữ liệu doanh thu theo tháng
-                            backgroundColor: 'rgba(75, 192, 192, 0.5)', // Tô màu miền với độ trong suốt
-                            borderColor: 'rgb(75, 192, 192)',
-                            fill: true, // Tô đầy màu dưới đường biểu đồ
-                            tension: 0.1 // Tạo độ cong cho đường
-                        },
-                        {
-                            label: 'Vốn',
-                            data: [45000, 40000, 50000, 49000, 30000, 35000, 28000], // Dữ liệu vốn theo tháng
-                            backgroundColor: 'rgba(255, 99, 132, 0.5)', // Tô màu miền với độ trong suốt
-                            borderColor: 'rgb(255, 99, 132)',
-                            fill: true, // Tô đầy màu dưới đường biểu đồ
-                            tension: 0.1
-                        },
-                        {
-                            label: 'Lợi Nhuận',
-                            data: [20000, 19000, 30000, 32000, 26000, 20000, 12000], // Dữ liệu lợi nhuận theo tháng
-                            backgroundColor: 'rgba(54, 162, 235, 0.5)', // Tô màu miền với độ trong suốt
-                            borderColor: 'rgb(54, 162, 235)',
-                            fill: true, // Tô đầy màu dưới đường biểu đồ
-                            tension: 0.1
+async function xemThongKe() {
+    let data_danh_thu=[]
+    let data_von=[]
+    let data_lai=[]
+    init()
+    await getData()
+    renderChart()
+    function init(){
+        $(".content-wrapper").html(` <div class="top-menu">
+            <ul class="list-group list-group-horizontal menu-container">
+                <li class="list-group-item model-item">Thống kê theo tháng</li>
+                <li class="list-group-item model-item">Thống kê chi tiết</li>
+            </ul>
+            </div>
+            <div class="model-content-tkbh mt-5 m-2">
+                <canvas id="thongkeChart"></canvas>
+                <div class="container_thongke_table"> 
+                    
+                </div>
+            </div>`)
+        $(".model-item").click(function (e) {
+            $(".model-item.active").removeClass("active")
+            $(this).addClass("active")
+                switch (e.target.innerText) {
+                case "Thống kê theo tháng":
+                    renderTable()
+                    break;
+                case "Báo cáo hôm nay":
+                    var date = new Date();
+                    var year = date.getFullYear();
+                    var month = (date.getMonth() + 1).toString().padStart(2, '0');
+                    var day = date.getDate().toString().padStart(2, '0');
+                    var formattedDate = year + '-' + month + '-' + day;
+                    $(this).addClass("active")
+                    $(".model-content-tkbh").load("./pages/thongkeban.php?day=" + formattedDate)
+                    break;
+                case "Báo cáo theo khoảng thời gian":
+                    $(this).addClass("active")
+                    $(".model-content-tkbh").html(`<label for=form-time-tk'>Từ ngày<input type='date' id='from-time-tk'></label>
+                    <label for='to-time-tk'>Đến ngày<input type='date' id='to-time-tk'></label>
+                    <button onclick='handTimeTK()'>Lọc</button><div class="baocao"></div>`)
+                    break;
+            }
+        })
+    }
+    function renderChart(){
+        const chartE=document.getElementById('thongkeChart')
+        const labels = data_danh_thu.map((item,index)=>{return 'Tháng '+(index+1)}); // Thời gian (các tháng)
+        console.log(data_danh_thu)
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Doanh Thu',
+                    data: data_danh_thu,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)', 
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1 // Tạo độ cong cho đường
+                },
+                {
+                    label: 'Vốn',
+                    data: data_von, // Dữ liệu vốn theo tháng
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)', 
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.1
+                },
+                {
+                    label: 'Lợi Nhuận',
+                    data: data_lai, // Dữ liệu lợi nhuận theo tháng
+                    backgroundColor: 'rgba(255, 255, 1, 0.5)', // Tô màu miền với độ trong suốt
+                    borderColor: 'rgb(255, 255, 1)',
+                    tension: 0.1
+                }
+            ]
+        };
+        const config = {
+            type: 'line', 
+            data: data,
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Tháng'
                         }
-                    ]
-                };
-                
-                // Cấu hình biểu đồ miền
-                const config = {
-                    type: 'line', // Biểu đồ đường, nhưng với `fill: true` sẽ trở thành biểu đồ miền
-                    data: data,
-                    options: {
-                        scales: {
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Tháng'
-                                }
-                            },
-                            y: {
-                                beginAtZero: true, // Trục Y bắt đầu từ 0
-                                title: {
-                                    display: true,
-                                    text: 'Số tiền (VND)'
-                                }
-                            }
-                        },
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function(tooltipItem) {
-                                        return tooltipItem.dataset.label + ': ' + tooltipItem.raw.toLocaleString() + ' VND';
-                                    }
-                                }
+                    },
+                    y: {
+                        beginAtZero: true, // Trục Y bắt đầu từ 0
+                        title: {
+                            display: true,
+                            text: 'Số tiền (VND)'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.dataset.label + ': ' + tooltipItem.raw.toLocaleString() + ' VND';
                             }
                         }
                     }
-                };
-                new Chart(chartE, config);
-
-
-                break;
-            case "Báo cáo hôm nay":
-                var date = new Date();
-                var year = date.getFullYear();
-                var month = (date.getMonth() + 1).toString().padStart(2, '0');
-                var day = date.getDate().toString().padStart(2, '0');
-                var formattedDate = year + '-' + month + '-' + day;
-                $(this).addClass("active")
-                $(".model-content-tkbh").load("./pages/thongkeban.php?day=" + formattedDate)
-                break;
-            case "Báo cáo theo khoảng thời gian":
-                $(this).addClass("active")
-                $(".model-content-tkbh").html(`<label for=form-time-tk'>Từ ngày<input type='date' id='from-time-tk'></label>
-                <label for='to-time-tk'>Đến ngày<input type='date' id='to-time-tk'></label>
-                <button onclick='handTimeTK()'>Lọc</button><div class="baocao"></div>`)
-                break;
-        }
-    })
+                }
+            }
+        };
+        new Chart(chartE, config);
+    }
+    async function getData(){
+        await $.get('./pages/module/donhang.php?thongkethang',function(data){
+            const data_chart=JSON.parse(data);
+            var time=new Date().getMonth()
+            for(let i=0;i<time;i++){
+                data_danh_thu[i]=0;
+            }
+            data_chart.forEach((item) =>{
+                data_danh_thu[item.month-1]=Number(item.total)
+            })
+        })
+        await $.get('./pages/module/phieunhap.php?thongkethang',(data) =>{
+            const data_chart=JSON.parse(data);
+            var time=new Date().getMonth()
+            for(let i=0;i<time;i++){
+                data_von[i]=0;
+            }
+            data_chart.forEach((item) =>{
+                data_von[item.month-1]=Number(item.total)
+            })
+        })
+        data_danh_thu.forEach((item,index) =>{
+            data_lai[index]=item-data_von[index]
+        })
+    }
+    function renderTable(){
+        let stringTable='';
+        $(".container_thongke_table").html(`<table class="table table-bordered">
+        <thead>
+            <tr>
+            <th scope="col">Tháng</th>
+            <th scope="col">Tổng danh thu</th>
+            <th scope="col">Tổng vốn</th>
+            <th scope="col">Tổng lợi nhuận</th>
+            </tr>
+        </thead>
+        <tbody class="data_table_thongkethang">
+        </tbody>
+        </table>`)
+            data_danh_thu.forEach((item,index) =>{
+                stringTable+=`<tr>
+                    <th scope="row">Tháng ${index+1}</th>
+                    <td>${item.toLocaleString('vi-VN')}</td>
+                    <td>${data_von[index].toLocaleString('vi-VN')}</td>
+                    <td>${data_lai[index].toLocaleString('vi-VN')}</td>
+                    </tr>`
+            })
+            $('.data_table_thongkethang').html(stringTable)
+    }
+    
 }
 function handTimeTK() {
     var from = $("#from-time-tk").val();

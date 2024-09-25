@@ -17,7 +17,18 @@
         $data=json_decode($data);
         foreach ($data as $value) {
             $phieunhap->LuuChiTiet($value);
-            $sanpham->suasanpham($value->maSP,$value->GiaSP,$value->donGia);
+            if($value->GiaSP)
+                $sanpham->suasanpham($value->maSP,$value->GiaSP,$value->donGia);
         }
+    }
+    else if(isset($_REQUEST['thongkethang'])){
+        $result=$phieunhap->thongkethang();
+        $array=[];
+        if(mysqli_num_rows($result)>0){
+            while($row=mysqli_fetch_assoc($result)){
+                $array[]=$row;
+            }    
+        }
+        echo json_encode($array);
     }
 ?>
