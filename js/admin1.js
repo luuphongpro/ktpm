@@ -769,7 +769,7 @@ async function xemThongKe() {
         new Chart(chartE, config);
     }
     async function getData(){
-        await $.get('./pages/module/donhang.php?thongkethang',function(data){
+        await $.get('./backend/controllers/donhang.php?thongkethang',function(data){
             const data_chart=JSON.parse(data);
             var time=new Date().getMonth()
             for(let i=0;i<time;i++){
@@ -779,7 +779,7 @@ async function xemThongKe() {
                 data_danh_thu[item.month-1]=Number(item.total)
             })
         })
-        await $.get('./pages/module/phieunhap.php?thongkethang',(data) =>{
+        await $.get('./backend/controllers/phieunhap.php?thongkethang',(data) =>{
             const data_chart=JSON.parse(data);
             var time=new Date().getMonth()
             for(let i=0;i<time;i++){

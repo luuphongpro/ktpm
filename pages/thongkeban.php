@@ -1,5 +1,6 @@
 <?php 
-  require './module/controller.php';
+  require './backend/models/banhang.php';
+  require './backend/models/sanpham.php';
   $banhang=new banhang;
   $sanpham=new sanpham;
     if(isset($_GET['day'])){
