@@ -1,5 +1,5 @@
 <?php  
-    include 'controller.php';
+    include '../models/sanpham.php';
     $sanpham=new sanpham;
     if(isset($POST['data'])){
         $data=$_POST['data']; 
@@ -13,13 +13,13 @@
         $result=$sanpham->xoasanpham($masp);
         return $result;
     }
-    else if(isset($_REQUEST['suasp'])){
+    // else if(isset($_REQUEST['suasp'])){
         
-        $data=$_REQUEST['dataJSON'];
-        $data=json_decode($data);
-        $result=$sanpham->suasanpham($data);
-        echo $result;
-    }
+    //     $data=$_REQUEST['dataJSON'];
+    //     $data=json_decode($data);
+    //     $result=$sanpham->suasanpham($data);
+    //     echo $result;
+    // }
     else if(isset($_REQUEST['them'])){
         $data=$_REQUEST['dataJSON'];
         $data=json_decode($data);

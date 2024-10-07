@@ -1,5 +1,5 @@
 <?php 
-    include 'controller.php';
+    include '../models/donhang.php';
     $donhang=new donhang;
     if(isset($_REQUEST['set'])){
         $data=$_REQUEST['dataJSON'];

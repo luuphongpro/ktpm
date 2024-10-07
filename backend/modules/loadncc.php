@@ -1,4 +1,4 @@
-<?php include './controller.php';
+<?php include '../models/nhacungcap.php';
 $nhacc = new nhacungcap;
 if(isset($_REQUEST['MaNCC'])){
     $mancc = $_REQUEST['MaNCC'];

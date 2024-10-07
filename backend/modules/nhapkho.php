@@ -1,7 +1,5 @@
 <div class="item-nhapkho-menu p-2">
     <i class="ti-angle-double-down float-end btn-show"></i>
-    
-    
 </div>
 <div class="d-flex flex-column">
     <div class="item-nhapkho pannel">
@@ -20,7 +18,7 @@
                     </thead>
                     <tbody>
                         <?php 
-                            include './module/controller.php';
+                            include '../models/sanpham.php';
                             $sanpham=new sanpham;
                             $result=$sanpham->danhsachsp();
                             if(mysqli_num_rows($result)>0){
@@ -53,6 +51,7 @@
         <label for="">Chọn nhà cung cấp:</label>
         <select name="" id="form_phieunhap-nhacc" class="w-25">
         <?php 
+            include '../models/nhacungcap.php';
             $nhacungcap=new nhacungcap;
             $result=$nhacungcap->dsnhacc();
             if(mysqli_num_rows($result)>0){

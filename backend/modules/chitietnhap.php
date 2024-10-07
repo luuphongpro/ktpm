@@ -11,7 +11,7 @@
   <tbody>
     <tr>
       <?php 
-        include './module/controller.php';
+        include '../models/phieunhap.php';
         $phieunhap=new phieunhap;
         $id=$_REQUEST['id'];
         $result=$phieunhap->TimPhieuNhap($id);

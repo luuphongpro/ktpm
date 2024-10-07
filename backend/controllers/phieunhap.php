@@ -1,7 +1,8 @@
 <?php 
-    include './controller.php';
+    include '../models/phieunhap.php';
+    include '../models/sanpham.php';
     $phieunhap=new phieunhap;
-    $sanpham=new sanpham();
+    $sanpham=new sanpham;
     if(isset($_REQUEST['row'])){
         $result=$phieunhap->CountRow();
         $row=mysqli_fetch_assoc($result);

@@ -139,6 +139,12 @@
                     <p>Lập phiếu nhập kho</p>
                   </a>
                 </li>
+                <li class="nav-item js_trahang">
+                  <a class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Lập phiếu trả hàng</p>
+                  </a>
+                </li>
                 <li class="nav-item js_thongkenhap">
                   <a class="nav-link">
                     <i class="far fa-circle nav-icon"></i>

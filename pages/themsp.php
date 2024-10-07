@@ -17,7 +17,7 @@
                     <select id="TenTH" name="MaTH">
                         <option value="0">---Chọn thương hiệu---</option>
                         <?php
-                        include './module/controller.php';
+                        include '../backend/models/thuonghieu.php';
                         $thuonghieu = new thuonghieu;
                         $result = $thuonghieu->dsthuonghieu();
                         if (mysqli_num_rows($result) > 0) {
@@ -35,14 +35,11 @@
                     <select id="TenDM" name="TenDM">
                         <option value="0">---Chọn danh mục---</option>
                         <?php
-                        include_once './module/controller.php';
+                        include_once '../backend/models/danhmuc.php';
                         $danhmuc = new danhmuc;
-                        $result = $danhmuc->dsdanhmuc();
-                        if (mysqli_num_rows($result) > 0) {
-                            $data = "";
-                            while ($row = mysqli_fetch_assoc($result)) {
+                        $result = $danhmuc->get_danh_muc();
+                        if (count($result) > 0) {
                                 $data .= '<option value="' . $row['MaDM'] . '">' . $row['TenDanhMuc'] . '</option>';
-                            }
                             echo $data;
                         }
                         ?>
@@ -69,13 +66,13 @@
             //Luồng gửi ảnh
             var formData = new FormData(form);
             var xhfile = new XMLHttpRequest();
-            xhfile.open("POST", "./pages/module/upload.php");
+            xhfile.open("POST", "./bakcend/controllers/upload.php");
             xhfile.send(formData);
             value['HinhAnh']=file.files[0]?.name
             console.log(value)
             var data = JSON.stringify(value);
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "./pages/module/sanpham.php?them");
+            xhr.open("POST", "./backend/controllers/sanpham.php?them");
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("dataJSON=" + data);
             xhr.onload = function() {

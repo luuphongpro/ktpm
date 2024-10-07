@@ -22,7 +22,7 @@ function Validator(option){
                         formElement.querySelector(rule.selector + ':checked')
                     )
                     break
-                default: messErorr=rules[i](inputElement.value)
+                // default: messErorr=rules[i](inputElement.value)
             }
             if(messErorr){
                 break
@@ -49,7 +49,7 @@ function Validator(option){
                         formElement.querySelector(rule.selector + ':checked')
                     )
                     break
-                default: messErorr=rules[i](inputElement.value)
+                // default: messErorr=rules[i](inputElement.value)
             }
             if(messErorr){
                 break
@@ -208,4 +208,21 @@ Validator.isSDT=function(selector){
         }
     }
 }
-
+Validator.isPositiveNumber=function(selector){
+    //Kiểm tra có phải là số dương hay không
+    return {
+        selector,
+        test: function(value){
+            return value>0 ? undefined : `Ký tự nhập phải là số dương`
+        }
+    }
+}
+Validator.isGreaterThan=function(selector,number_than){
+    //Kiểm tra dữ liệu có lớn hơn số vừa chỉ định hay không
+    return {
+        selector,
+        test: function(value){
+            return value> number_than? undefined : `Dữ liệu phải lớn hơn ${number_than}`
+        }
+    }
+}

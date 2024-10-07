@@ -37,15 +37,10 @@
         form: "#form-them",
         rules: [
             Validator.isRequired("#TenNCC"),
-            // Validator.isSDT("#TenNCC"),
-
             Validator.isRequired("#DiaChi"),
-
             Validator.isRequired("#Email"),
-            // Validator.isConfirmed("#Email", function() {
-            //     return $('#DiaChi').val();
-            // }),
-
+            Validator.isEmail("#Email"),
+            Validator.isSDT("#SoDienThoai"),
             Validator.isRequired("#SoDienThoai"),
             Validator.isMinLength("#SoDienThoai", 6),
             Validator.isMaxLength("#SoDienThoai", 25),
@@ -55,14 +50,14 @@
             console.log(value);
             var data = JSON.stringify(value);
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "./pages/module/nhaCC.php?them");
+            xhr.open("POST", "./backend/controllers/nhaCC.php?them");
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("dataJSON=" + data);
             xhr.onload = function() {
                 if (xhr.status >= 200 && xhr.status < 300) {
-                    console.log(xhr.responseText);
                         alert("Tạo nhà cung cấp thành công")
                         $(".model-content").load("./pages/themncc.php")
+                        
                 }
             }
         }
