@@ -37,15 +37,10 @@
         form: "#form-them",
         rules: [
             Validator.isRequired("#TenNCC"),
-            // Validator.isSDT("#TenNCC"),
-
             Validator.isRequired("#DiaChi"),
-
             Validator.isRequired("#Email"),
-            // Validator.isConfirmed("#Email", function() {
-            //     return $('#DiaChi').val();
-            // }),
-
+            Validator.isEmail("#Email"),
+            Validator.isSDT("#SoDienThoai"),
             Validator.isRequired("#SoDienThoai"),
             Validator.isMinLength("#SoDienThoai", 6),
             Validator.isMaxLength("#SoDienThoai", 25),

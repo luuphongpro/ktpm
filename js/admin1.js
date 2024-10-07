@@ -325,13 +325,15 @@ function qlncc() {
         }
         else if (e.target.innerText == "Thêm nhà cung cấp") {
             $(this).addClass("active")
-            $(".model-content-nhacc").load("./pages/themncc.php")
+            $(".model-content-nhacc").load("./pages/themncc.php",function() {
+                
+            })
         }
     })
 }
-var dataPhieuNhap = {};
-var dataCTPN = [];
 function nhapkho() {
+    var dataPhieuNhap = {};
+    var dataCTPN = [];
     // $(".model-right.active").removeClass("active")
     // $(".model-qlkho").addClass("active")
     $(".content-wrapper").load("./backend/modules/nhapkho.php", function () {
@@ -345,44 +347,7 @@ function nhapkho() {
         $(".them-phieunhap").click(function () {
             $(".item-nhapkho.pannel").slideToggle()
             $("#form-phieunhap").hide()
-            Validator({
-                form: '#form-phieunhap',
-                rules: [
-                    Validator.isRequired("#form_phieunhap-MaSP"),
-                    Validator.isRequired("#form_phieunhap-TenSP"),
-                    Validator.isRequired("#form_phieunhap-soluong"),
-                    Validator.isRequired("#form_phieunhap-dongia"),
-                    Validator.isNumber("#form_phieunhap-soluong"),
-                    Validator.isNumber("#form_phieunhap-dongia"),
-                ],
-                errorElement: '.form-message',
-                onSubmit: function (value) {
-                    var tableE = document.querySelector("#table_phieunhap")
-                    var newRow = tableE.insertRow();
-                    let data = new Object();
-                    var newcell0 = newRow.insertCell(0)
-                    newcell0.innerHTML = value['f_pn_MaSP'];
-                    var newcell1 = newRow.insertCell(1)
-                    newcell1.innerHTML = value['f_pn_TenSP'];
-                    var newcell2 = newRow.insertCell(2)
-                    newcell2.innerHTML = value['f_pn_soluong'];
-                    var newcell3 = newRow.insertCell(3)
-                    newcell3.innerHTML = value['f_pn_dongia'];
-                    var newcell4 = newRow.insertCell(4)
-                    newcell4.innerHTML = Number(value['f_pn_soluong']) * Number(value['f_pn_dongia'])
-                    $(".item-nhapkho.pannel").slideToggle("show")
-                    $(".table-content-nhap").removeClass("col-8").addClass("col-12");
-                    document.querySelector("#form-phieunhap").reset()
-                    data['maPhieuNhap'] = dataPhieuNhap['maPhieuNhap']
-                    data['soLuong'] = value['f_pn_soluong'];
-                    data['donGia'] = value['f_pn_dongia'];
-                    data['maSP'] = value['f_pn_MaSP'];
-                    data['GiaSP']=$('.js_giaban').text()
-                    dataCTPN.push(data)
-                    dataPhieuNhap['tongTien'] += data['soLuong'] * data['donGia']
-                    $(".tongtien-phieunhap").text(dataPhieuNhap['tongTien'])
-                }
-            })
+            
         })
     })
 }
@@ -400,12 +365,12 @@ function setValueForm(event) {
     const formPhieuNhap = document.getElementById('form-phieunhap');
     let stringHTML=`<div class=" form-group m-4">
                         <label for="form_phieunhap-MaSP">Mã sản phẩm:</label>
-                        <input id="form_phieunhap-MaSP" name="f_pn_MaSP" class="float-end">
+                        <input id="form_phieunhap-MaSP" name="f_pn_MaSP" class="float-end" disabled>
                         <p class="form-message"></p>
                     </div>
                     <div class=" form-group m-4">
-                        <label for="form_phieunhap-TenSP">Tên sản phẩm:</label>
-                        <input id="form_phieunhap-TenSP" name="f_pn_TenSP" class="float-end">
+                        <label for="form_phieunhap-TenSP">Tên sản phẩm:</label dis>
+                        <input id="form_phieunhap-TenSP" name="f_pn_TenSP" class="float-end" disabled>
                         <p class="form-message"></p>
                     </div>
                     <div class=" form-group m-4">
@@ -426,8 +391,8 @@ function setValueForm(event) {
     }
     if(map[3]==0){
         stringHTML+=`<div class=" form-group m-4">
-        <label for="form_phieunhap-dongia">Hệ số lãi:</label>
-        <input name="f_pn_lai" class="float-end">
+        <label for="form_phieunhap-hesolai">Hệ số lãi:</label>
+        <input name="f_pn_lai" class="float-end" id="form_phieunhap-hesolai">
         <p class="form-message"></p>
         <div >Giá bán:<span class="js_giaban"></span></div>
         </div>`
@@ -440,14 +405,55 @@ function setValueForm(event) {
         inputE[i].value=map[i]
     }
     $('[name="f_pn_lai"]').on('keyup', function(){
-        console.log("cmmm");
         let dongia = Number($('[name="f_pn_dongia"]').val());
         let lai = Number($(this).val());
         let giaban = dongia + (dongia * lai / 100); 
-        console.log(giaban)
         $('.js_giaban').html(giaban);
     });
-    
+    Validator({
+        form: '#form-phieunhap',
+        rules: [
+            Validator.isRequired("#form_phieunhap-MaSP"),
+            Validator.isRequired("#form_phieunhap-TenSP"),
+            Validator.isRequired("#form_phieunhap-soluong"),
+            Validator.isRequired("#form_phieunhap-dongia"),
+            Validator.isNumber("#form_phieunhap-soluong"),
+            Validator.isPositiveNumber("#form_phieunhap-soluong"),
+            Validator.isNumber("#form_phieunhap-dongia"),
+            Validator.isPositiveNumber("#form_phieunhap-dongia"),
+            Validator.isGreaterThan("#form_phieunhap-dongia",1000),
+            Validator.isRequired("#form_phieunhap-hesolai"),
+        ],
+        errorElement: ".form-message",
+        onSubmit: function (value) {
+            var tableE = document.querySelector("#table_phieunhap")
+            var newRow = tableE.insertRow();
+            let data = new Object();
+            var newcell0 = newRow.insertCell(0)
+            newcell0.innerHTML = value['f_pn_MaSP'];
+            var newcell1 = newRow.insertCell(1)
+            newcell1.innerHTML = value['f_pn_TenSP'];
+            var newcell2 = newRow.insertCell(2)
+            newcell2.innerHTML = value['f_pn_soluong'];
+            var newcell3 = newRow.insertCell(3)
+            newcell3.innerHTML = value['f_pn_dongia'];
+            var newcell4 = newRow.insertCell(4)
+            newcell4.innerHTML = Number(value['f_pn_soluong']) * Number(value['f_pn_dongia'])
+            $(".item-nhapkho.pannel").slideToggle("show")
+            $(".table-content-nhap").removeClass("col-8").addClass("col-12");
+            document.querySelector("#form-phieunhap").reset()
+            data['maPhieuNhap'] = dataPhieuNhap['maPhieuNhap']
+            data['soLuong'] = value['f_pn_soluong'];
+            data['donGia'] = value['f_pn_dongia'];
+            data['maSP'] = value['f_pn_MaSP'];
+            data['GiaSP']=$('.js_giaban').text()
+            dataCTPN.push(data)
+            dataPhieuNhap['tongTien'] += data['soLuong'] * data['donGia']
+            $(".tongtien-phieunhap").text(dataPhieuNhap['tongTien'])
+            console.log(dataCTPN)
+            console.log(dataPhieuNhap)
+        }
+    })
 }
 function thongkenhap() {
     // $(".model-right.active").removeClass("active")
