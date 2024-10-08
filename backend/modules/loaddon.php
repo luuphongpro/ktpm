@@ -10,8 +10,11 @@
         $result = $price . $result;
         return $result;
     }
+    // include './connect.php';
     include '../models/donhang.php';
+    $conn=new connect;
     $banhang=new donhang;
+    $conn->constructor();
     $data="";
     if(!isset($_GET['chon'])){
         global $result;
@@ -30,6 +33,7 @@
                 $strtmp="AND NgayDatHang BETWEEN '".$from."' AND '".$to."'";
             }
             $strSQL="SELECT * FROM `donhang` WHERE TrangThaiDonHang='0' ".(!isset($_GET['status']) ? "OR TrangThaiDonHang='1'" : "").$strtmp;
+            $result=$conn->excuteSQL($strSQL);
         }
         $data="<div class='table-content m-2'><nav aria-label='breadcrumb'>
                         <ol class='breadcrumb'>
@@ -160,4 +164,5 @@
         //     WHERE NgayDatHang BETWEEN '2023-02-21' AND '2024-05-24';";
         // }
     }
+    $conn->disconnect();
 ?>
