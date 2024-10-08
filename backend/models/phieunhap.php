@@ -59,4 +59,15 @@ class phieunhap{
         $this->conn->disconnect();
         return $result;
     }
+    function thongkethang(){
+        $this->conn->constructor();
+        $strSQL="SELECT MONTH(ngayLap) AS month, 
+                    SUM(tongTien) AS total
+                FROM phieunhap
+                WHERE YEAR(ngayLap) = YEAR(CURDATE())
+                GROUP BY MONTH(ngayLap);";
+        $result=$this->conn->excuteSQL($strSQL);
+        $this->conn->disconnect();
+        return $result;   
+    }
 }

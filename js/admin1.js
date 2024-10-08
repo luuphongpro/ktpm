@@ -558,7 +558,6 @@ function duyetdonhang() {
     $(".content-wrapper").html(`<div class="top-menu">
     <ul class="list-group list-group-horizontal menu-container">
         <li class="list-group-item model-item">Danh sách đơn hàng</li>
-        <li class="list-group-item model-item">Tạo đơn hàng</li>
         <li class="list-group-item model-item">Lọc danh sách đơn hàng chưa duyệt</li>
     </ul>
     </div>
@@ -569,13 +568,13 @@ function duyetdonhang() {
         $(".model-item.active").removeClass("active");
         if (e.target.innerText == "Danh sách đơn hàng") {
             $(this).addClass("active");
-            $(".model-content-hd").load("./backend/module/loaddon.php", function () {
+            $(".model-content-hd").load("./backend/modules/loaddon.php", function () {
                 viewDuyet();
             })
         }
         else if (e.target.innerText == "Lọc danh sách đơn hàng chưa duyệt") {
             $(this).addClass("active");
-            $(".table-content").load("./backend/module/loaddon.php?status=0", function () {
+            $(".table-content").load("./backend/modules/loaddon.php?status=0", function () {
                 viewDuyet();
             })
         }
@@ -597,9 +596,9 @@ function viewDuyet() {
         inHoaDon($(this).attr("id_i"));
     })
     $("tr").click(function () {
-        $(".table-content").load("./backend/module/loaddon.php?id=" + $(this).attr("id") + "&chon=xem", function () {
+        $(".table-content").load("./backend/modules/loaddon.php?id=" + $(this).attr("id") + "&chon=xem", function () {
             $(".btn-loaddon").click(function () {
-                $(".table-content").load("./backend/module/loaddon.php", function () {
+                $(".table-content").load("./backend/modules/loaddon.php", function () {
                     viewDuyet();
                 })
             })
@@ -608,7 +607,7 @@ function viewDuyet() {
 }
 function handleDuyet(id) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "./backend/module/loaddon.php?id=" + id + "&chon=capnhat");
+    xhr.open("GET", "./backend/modules/loaddon.php?id=" + id + "&chon=capnhat");
     xhr.send();
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
@@ -628,7 +627,7 @@ function inHoaDon(id) {
             window.open("./hoadon.php?donhang&id=" + id);
         })
         $(".btn-loaddon").click(function () {
-            $(".table-content").load("./backend/module/loaddon.php", function () {
+            $(".table-content").load("./backend/modules/loaddon.php", function () {
                 viewDuyet();
             });
         });
@@ -638,12 +637,12 @@ function handTimeDon() {
     var from = $("#from-time").val();
     var to = $("#to-time").val();
     if ($(".model-item.active").text().trim() == "Danh sách đơn hàng") {
-        $(".model-content-hd").load("./backend/module/loaddon.php?from=" + from + "&to=" + to, function () {
+        $(".model-content-hd").load("./backend/modules/loaddon.php?from=" + from + "&to=" + to, function () {
             viewDuyet();
         })
     }
     else {
-        $(".model-content-hd").load("./backend/module/loaddon.php?status=0&from=" + from + "&to=" + to, function () {
+        $(".model-content-hd").load("./backend/modules/loaddon.php?status=0&from=" + from + "&to=" + to, function () {
             viewDuyet();
         })
     }
@@ -651,7 +650,7 @@ function handTimeDon() {
 function timdonhang(event) {
 
     if (event.key == "Enter") {
-        $.post("./backend/module/loaddon.php?timdon",
+        $.post("./backend/modules/loaddon.php?timdon",
             {
                 SDT: $(".search-donhang").val(),
             },
@@ -672,7 +671,6 @@ async function xemThongKe() {
         $(".content-wrapper").html(` <div class="top-menu">
             <ul class="list-group list-group-horizontal menu-container">
                 <li class="list-group-item model-item">Thống kê theo tháng</li>
-                <li class="list-group-item model-item">Thống kê chi tiết</li>
             </ul>
             </div>
             <div class="model-content-tkbh mt-5 m-2">
