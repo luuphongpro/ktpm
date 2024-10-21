@@ -2,7 +2,7 @@
 class connect{
     private $conn;
     function constructor() {
-        $this->conn=new mysqli("127.0.0.1","root","","mypham");
+        $this->conn=new mysqli("127.0.0.1","root","12345","mypham");
         $this->conn->set_charset("utf8");
         if($this->conn->connect_error){
             die("connect failed");
