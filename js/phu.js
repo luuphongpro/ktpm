@@ -267,6 +267,7 @@ function handlePriceForm(event) {
 }
 var tongHoaDon 
 function RenderGioHang() {
+    // home.js line 127
     var Cart = JSON.parse(localStorage.getItem("Cart")) || {};
     var tableGioHang = ''
     var bodyGioHang = ''
@@ -326,14 +327,14 @@ function DeleteCart(id) {
     })
 }
 function DonHang() {
-    var account = JSON.parse(sessionStorage.getItem("currentLogin"))
+    var account = JSON.parse(sessionStorage.getItem("currentLogin")) // home.js line 25
     var donhang = JSON.parse(localStorage.getItem("Cart"))
     if(account && donhang){
         account['tong'] = tongHoaDon
         account['arr']=donhang['arr']
         
         var xhr = new XMLHttpRequest()
-        xhr.open("POST", "./pages/module/donhang.php?set")
+        xhr.open("POST", "./backend/controllers/donhang.php?set")
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send("dataJSON=" + JSON.stringify(account));
         xhr.onload = function () {
