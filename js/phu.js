@@ -50,8 +50,6 @@ $(document).ready(function () {
                             // console.log(xhr.responseText);
                             $("#productDetailContainer").html(xhr.responseText)
                         }
-
-
                     })
                 });
                 break;
@@ -69,7 +67,7 @@ $(document).ready(function () {
                     RenderGioHang();
                     $(e.target).addClass("active");
                     $(".js_dathang").on("click",function () {
-                        DonHang()
+                        NavigateToCheckout();
                     })
                 });
                 break;
@@ -326,6 +324,46 @@ function DeleteCart(id) {
         }
     })
 }
+function NavigateToCheckout() {
+    $(function ($) {
+        $("#root").load("./pages/checkout.php", function () {
+            var donhang = JSON.parse(localStorage.getItem("Cart"))
+            var tableTongDonHang = '<h5 class="font-weight-medium mb-3">Sản phẩm</h5>';
+            var tongHoaDon = 0;
+            donhang['arr'].forEach((item) => {
+                tableTongDonHang += `
+                    <div class="d-flex justify-content-between">
+                        <p>${item['TenSP']}</p>
+                        <p>${item['GiaSP']}</p>
+                    </div>
+                `;
+                tongHoaDon += item['GiaSP'] * item['soluong'];
+            });
+            tableTongDonHang += `
+                <hr class="mt-0">
+                <div class="d-flex justify-content-between mb-3 pt-1">
+                    <h6 class="font-weight-medium">Tổng tiền sản phẩm</h6>
+                    <h6 class="font-weight-medium" name="amount" id="amount">${tongHoaDon}</h6>
+                    <input type="hidden" name="amount" value="${tongHoaDon}">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <h6 class="font-weight-medium">Phí vận chuyển</h6>
+                    <h6 class="font-weight-medium">10</h6>
+                </div>
+            `;
+            $(".js_tongdonhang").html(tableTongDonHang);
+            $(".cart-total").text(tongHoaDon + 10);
+            $(".js_thanhtoan").on("click", function (event) {
+                if ($('#bankCode').is(':checked')) {
+                    DonHang();
+                } else if ($('#directcheck').is(':checked')) {
+                    event.preventDefault();
+                    DonHang();
+                }
+            });
+        });
+    });
+}
 function DonHang() {
     var account = JSON.parse(sessionStorage.getItem("currentLogin")) // home.js line 25
     var donhang = JSON.parse(localStorage.getItem("Cart"))
@@ -348,8 +386,7 @@ function DonHang() {
             setTimeout(function(){
                 location.reload()
             },0)
-        }
-        
+        }   
     }
     else {
         alert("Đặt hàng không thành công, vui lòng kiểm tra đăng nhập và giỏ hàng")
