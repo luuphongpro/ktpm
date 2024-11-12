@@ -1,5 +1,5 @@
+
 var userlogin=JSON.parse(sessionStorage.getItem("currentLogin"));
-var Cart=JSON.parse(localStorage.getItem("Cart")) || {};
 
 $('#Login').click(() =>{
     $(".modal-login").css("display","flex")
@@ -116,6 +116,7 @@ else{
     $(".name_login").addClass("js_namelogin")
     $(".js_namelogin").click(function(){
         $(".modal-login").css("display", "flex");
+        console.log(document.querySelector('.modal-login'))
         console.log("cmmm")
     })
 }
@@ -124,43 +125,7 @@ $(".user-logout").click(function(){
     userlogin.flag=false
     sessionStorage.setItem('currentLogin',JSON.stringify(userlogin));
 })
-function AddCart(id,soluong=1){
-    soluong=Number($(".input-qty").val()) || 1;
-    if(userlogin?.flag){
-        var xhr=new XMLHttpRequest;
-        xhr.open("GET","./backend/controllers/sanpham.php?get&id="+id)
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send();
-        xhr.onload=function(){
-            alert('Thêm vào giỏ hàng thành công')
-            var sanpham=JSON.parse(xhr.responseText)
-            var isSanPham
-            if(!Cart['arr']){
-                Cart['arr']=[]
-            }
-            isSanPham=Cart['arr'].some(value => value['MaSP'] ==sanpham['MaSP'])
-            if(isSanPham){
-                Cart['arr'].forEach((value,index) =>{
-                    if(value['MaSP']==sanpham['MaSP']){
-                        value['soluong']=soluong+value['soluong']
-                    }
-                })
-            }
-            else {
-                sanpham['soluong']=soluong;
-                Cart['arr'].push(sanpham)
-            }
-            sanpham=null
-            localStorage.setItem("Cart",JSON.stringify(Cart))
-            if(Cart['arr']){
-                console.log(Cart['arr'].length)
-                $(".js_numcart").text(Cart['arr'].length)
-            }
-        }
-    }
-    else 
-        alert("Phải đăng nhập mới có thể mua hàng")
-}
+
 function LoginOption(level){
     var html=`<li><a class="option-item">
     <i class="fa fa-user" aria-hidden="true"></i> Trang cá nhân</a></li>
@@ -179,50 +144,23 @@ function LoginOption(level){
     html+=`<li><a class="user-logout option-item" href="index.php?chon&id=home"><i class="fa fa-sign-out" aria-hidden="true"></i> Thoát</a></li>`
     $(".option-dn").html(html)
 }
-// function TangGioHang(){
-//     $('.quantity button').on('click', function () {
-//         var button = $(this);
-//         var oldValue = button.parent().parent().find('input').val();
-//         if (button.hasClass('btn-plus')) {
-//             var newVal = parseFloat(oldValue) + 1;
-//         } else {
-//             if (oldValue > 0) {
-//                 var newVal = parseFloat(oldValue) - 1;
-//             } else {
-//                 newVal = 0;
-//             }
-//         }
-//         button.parent().parent().find('input').val(newVal);
-//     });
-// }
-function TangNe(index){
-    var oldValue=Number($(".js_soluong"+index).val())
-    console.log(oldValue)
-    $(".js_soluong"+index).val(oldValue+1)
-    Cart['arr'].forEach((value) => {
-        if(value['MaSP']==index){
-            tongHoaDon+=Number(value['GiaSP'])
-            value['soluong']=oldValue+1
+function TangGioHang(){
+    $('.quantity button').on('click', function () {
+        var button = $(this);
+        var oldValue = button.parent().parent().find('input').val();
+        if (button.hasClass('btn-plus')) {
+            var newVal = parseFloat(oldValue) + 1;
+        } else {
+            if (oldValue > 0) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 0;
+            }
         }
-    })
-    // $(".js_tongtien").text(tongHoaDon)
-    localStorage.setItem("Cart",JSON.stringify(Cart))
-    RenderGioHang()
+        button.parent().parent().find('input').val(newVal);
+    });
+}
 
-}
-function GiamNe(index){
-    var oldValue=Number($(".js_soluong"+index).val())
-    $(".js_soluong"+index).val(oldValue-1)
-    Cart['arr'].forEach((value) => {
-        if(value['MaSP']==index){
-            tongHoaDon-=Number(value['GiaSP'])
-            value['soluong']=oldValue-1
-        }
-    })
-    // $(".js_tongtien").text(tongHoaDon)
-    localStorage.setItem("Cart",JSON.stringify(Cart))
-    RenderGioHang()
-}
 function increasingNumber(e) {
     let qty = e.parentNode.querySelector('.input-qty');
     if (parseInt(qty.value) < qty.max) {

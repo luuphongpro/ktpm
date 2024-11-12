@@ -21,21 +21,21 @@ function filterSanphamByPrice($sanpham, $selectedPrice) {
 }
 
 $db = new ConnectDB();
-if (isset($_REQUEST['data'])) {
-    $data=$_REQUEST['data'];
-    $data = json_decode($data);
+if (isset($_GET['price'])) {
+    $price=$_GET['price'];
+    $dm=$_GET['dm'];
     $sanpham =null;
-    if (!$data->alldm) {
+    if (!$price=='1') {
         $sanpham=[];
-        foreach ($data->dm as $item) {
+        foreach ($dm->data as $item) {
             $result = fetchSanphamDM($db->conn, $item);
-            $spLocGia = filterSanphamByPrice($result, $data->price);
+            $spLocGia = filterSanphamByPrice($result, $price);
             $sanpham=array_merge($sanpham,$spLocGia);
         }
     } else {
         $sanpham=null;
         $sanpham = fetchSanpham($db->conn);
-        $sanpham = filterSanphamByPrice($sanpham, $data->price);
+        $sanpham = filterSanphamByPrice($sanpham, $price);
     }
     // print_r($sanpham);
     

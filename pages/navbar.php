@@ -38,23 +38,26 @@
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left">
-                <form action="">
+                <?php if(!isset($_GET['product'])): ?>
+                <form id="search_product_top">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
-                        <div class="input-group-append">
+                        <input type="hidden" name="product">
+                        <input type="text" class="form-control" name="search_query" placeholder="Search for products">
+                        <div type="button" class="input-group-append button_search">
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
                             </span>
                         </div>
                     </div>
                 </form>
+                <?php endif; ?>
             </div>
             <div class="col-lg-3 col-6 text-right">
                 <a href="" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
-                <a class="btn border" onclick="ClickIconCart()">
+                <a href="index.php?cart" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span class="badge js_numcart">0</span>
                 </a>
@@ -447,11 +450,19 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <div href="index.php" class="nav-item nav-link active nav-top">Trang chủ</div>
-                            <div href="" class="nav-item nav-link nav-top">Sản phẩm</div>
+                            <a href="index.php" class="nav-item nav-link nav-top
+                            <?php if (empty($_SERVER['QUERY_STRING'])) echo 'active'; ?>
+                            ">Trang chủ</a>
+                            <a href="index.php?product" class="nav-item nav-link nav-top
+                            <?php if (isset($_GET['product'])) echo 'active'; ?>
+                            ">Sản phẩm</a>
 
-                            <div href="#" class="nav-item nav-link nav-top">Giỏ hàng</div>
-                            <div href="#" class="nav-item nav-link nav-top">Thanh toán</div>
+                            <a href="index.php?cart" class="nav-item nav-link nav-top
+                            <?php if (isset($_GET['cart'])) echo 'active'; ?>
+                            ">Giỏ hàng</a>
+                            <a href="index.php?checkout" class="nav-item nav-link nav-top
+                            <?php if (isset($_GET['checkout'])) echo 'active'; ?>
+                            ">Thanh toán</a>
                             <!-- <a href="detail.html" class="nav-item nav-link">Shop Detail</a> -->
 
                             <!-- <div class="nav-item dropdown">

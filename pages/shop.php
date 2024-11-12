@@ -1,6 +1,3 @@
-
-
-
 <div class="container-fluid">
         <div class="row bg-secondary py-2 px-xl-5">
             <!-- Topbar content -->
@@ -53,7 +50,7 @@
                     <h5 class="font-weight-semi-bold mb-4">Thương hiệu</h5>
                 </div> -->
                 
-                </div>
+            </div>
             <!-- Product search form -->
                  
                 <!-- Price End -->
@@ -70,15 +67,22 @@
 
 
             <!-- Shop Product Start -->
-                <div class="col-lg-9 col-md-12">
+                <div class="col-lg-9 col-md-12 mt-5">
                     <div class="row pb-3">
                         <div class="col-12 pb-1">
+                            <form >
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="input_searchsp" placeholder="Tìm kiếm sản phẩm" name="search">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary btn_searchsp" type="submit">Search</button>
+                                        <input type="hidden" name="product">
+                                        <input type="text" class="form-control" id="input_searchsp" placeholder="Tìm kiếm sản phẩm" name="search_query" value="<?php 
+                                        if(isset($_GET['search_query'])){
+                                            echo $_GET['search_query'];
+                                        }
+                                        ?>">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary btn_searchsp" type="submit">Search</button>
+                                        </div>
                                     </div>
-                                </div>
+                            </form>
                         </div>
                         <div class="product-detail" id="productDetailContainer">
                             <?php require("product_start.php"); ?>
@@ -95,11 +99,7 @@
     </div>
 <!-- Shop End -->
 </main>
- <div class="modal product-detail">
-            <button class="modal-close close-popup"><i class="fa-thin fa-xmark">X</i></button>
-            <div class="modal-container mdl-cnt" id="product-detail-content">
-            </div>
-        </div>
+<script src="js/product.js" defer></script>
 
 
 

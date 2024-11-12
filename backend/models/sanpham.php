@@ -1,7 +1,5 @@
 <?php 
 include_once 'connect.php';
-
-
 class sanpham
 {
     private $conn;
@@ -42,7 +40,7 @@ class sanpham
         $strSQL = "SELECT *
                    FROM sanpham
                    INNER JOIN thuonghieu ON sanpham.MaTH = thuonghieu.MaTH
-                   WHERE LIKE '%".$ten."%'";
+                   WHERE sanpham.TenSP LIKE '%".$ten."%'";
         $result = $this->conn->excuteSQL($strSQL);
         $this->conn->disconnect();
         return $result;
@@ -86,5 +84,18 @@ class sanpham
         $this->conn->excuteSQL($strSQL);
         $this->conn->disconnect();
         return $result;
+    }
+    function dssanpham_danhmuc($iddanhmuc) {
+        $this->conn->constructor();
+        $strSQL="SELECT * FROM sanpham WHERE MaDM=$iddanhmuc";
+        $result=$this->conn->excuteSQL($strSQL);
+        $array=[];
+        if(mysqli_num_rows($result)>0){
+            while($row=mysqli_fetch_assoc($result)){
+                $array[]=$row;
+            }
+        }
+        $this->conn->disconnect();
+        return $array;
     }
 }

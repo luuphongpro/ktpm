@@ -39,9 +39,10 @@
     ?>
     <div id="root">
     <?php 
-       include_once './pages/home.php';
-       include_once './pages/dangky.php';
+       include_once './pages/layout.php';
+        include_once './pages/dangky.php';
     ?>
+    
     </div>
     <?php 
     include_once './pages/footer.php' ;
@@ -57,13 +58,15 @@
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
-
+    <script src="js/XMLHTTP.js"></script>
+    <script src="js/vadidation.js"></script>
     <!-- Template Javascript -->
     <script src="js/phu.js"></script>
     <script src="js/main.js"></script>
     <!--Javascript Product-->
     <script src="js/initialization.js"></script>
     <script src="./js/home.js"></script>
+    
 </body>
 
 </html>
