@@ -15,27 +15,34 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="./css/cssDangky.css">
+
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <!-- Font Awesome -->
     <!-- <link href="css/all.min.css" rel="stylesheet"> -->
-    
+
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    
+
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
 </head>
 
 <body>
+    <!-- Reimport css -->
+    <style>
+        <?php include "./css/style.css" ?>
+        <?php include "./css/cssDangky.css" ?>
+    </style>
+
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
     <?php
-            // include './pages/topbar.php' ;
-            include_once './pages/navbar.php' ;
+    // include './pages/topbar.php' ;
+    include_once './pages/navbar.php';
     ?>
     <div id="root">
     <?php 
@@ -44,10 +51,9 @@
     ?>
     
     </div>
-    <?php 
-    include_once './pages/footer.php' ;
+    <?php
+    include_once './pages/footer.php';
     ?>
-    
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

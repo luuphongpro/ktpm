@@ -1,8 +1,8 @@
 <?php
 class ConnectDB{
     private $host = 'localhost';
-    private $user = 'root';
-    private $password = '';
+    private $user = 'phi';
+    private $password = '12345';
     private $database = 'mypham';
     public $conn;
 
