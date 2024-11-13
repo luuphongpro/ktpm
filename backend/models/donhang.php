@@ -1,10 +1,5 @@
 <?php
 include_once 'connect.php';
-
-
-
-
-
 class donhang
 {
     private $madonhang;
@@ -64,6 +59,14 @@ class donhang
         $this->conn->disconnect();
         return $result;
     }
+    function update_payment($madon,$status) {
+        $this->conn->constructor();
+        $strSQL = "UPDATE `donhang` SET `TrangThaiDonHang`='$status' WHERE MaDonHang=$madon";
+        // echo $strSQL;
+        $result = $this->conn->excuteSQL($strSQL);
+        $this->conn->disconnect();
+        return $result;
+    }
     function thongkethang(){
         $this->conn->constructor();
         $sql="SELECT 
@@ -89,7 +92,7 @@ class donhang
         VALUES ('" . ($this->madonhang) . "', NOW(), '" . $data->diachi . "', '0', '" . $data->tong . "', '" . $data->SDT . "', '')";
         $result=$this->conn->excuteSQL($strSQL);
         $this->conn->disconnect();
-        return $result;
+        return $this->madonhang;
     }
     
     function setChiTietDonHang($data){

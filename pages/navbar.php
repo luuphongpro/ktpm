@@ -460,9 +460,9 @@
                             <a href="index.php?cart" class="nav-item nav-link nav-top
                             <?php if (isset($_GET['cart'])) echo 'active'; ?>
                             ">Giỏ hàng</a>
-                            <a href="index.php?checkout" class="nav-item nav-link nav-top
+                            <!-- <a href="index.php?checkout" class="nav-item nav-link nav-top
                             <?php if (isset($_GET['checkout'])) echo 'active'; ?>
-                            ">Thanh toán</a>
+                            ">Thanh toán</a> -->
                             <!-- <a href="detail.html" class="nav-item nav-link">Shop Detail</a> -->
 
                             <!-- <div class="nav-item dropdown">
@@ -488,7 +488,7 @@
                 <div id="header-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active" style="height: 410px;">
-                            <img class="img-fluid" src="../img/carousel-5.jpg" alt="Image">
+                            <img class="img-fluid" src="./img/carousel-5.jpg" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <!-- <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First
@@ -499,7 +499,7 @@
                             </div>
                         </div>
                         <div class="carousel-item" style="height: 410px;">
-                            <img class="img-fluid" src="../img/carousel-4.jpg" alt="Image">
+                            <img class="img-fluid" src="./img/carousel-4.jpg" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <!-- <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First
@@ -510,7 +510,7 @@
                             </div>
                         </div>
                         <div class="carousel-item" style="height: 410px;">
-                            <img class="img-fluid" src="../img/carousel-3.jpg" alt="Image">
+                            <img class="img-fluid" src="./img/carousel-3.jpg" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <!-- <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First

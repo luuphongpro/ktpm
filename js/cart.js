@@ -6,8 +6,9 @@ class Cart extends BasicHome{
         this.tongHoaDon = 0;
         this.renderCart();
         $('.js_dathang').click(() =>{
-            this.datDonHang();
+            this.NavigateToCheckout();
         })
+        this.deleteCart();
     }
     
     renderCart() {
@@ -79,21 +80,6 @@ class Cart extends BasicHome{
                 this.renderCart()
                 this.updateCartCount()
             })
-            // xhr.open("POST", "./backend/controllers/donhang.php?set")
-            // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            // xhr.send("dataJSON=" + JSON.stringify(account));
-            // xhr.onload = function () {
-            //     var message=xhr.responseText
-            //     if(message=="sucsess")
-            //         alert("Đơn hàng đã đặt thành công")
-            //     else 
-            //         alert("Đơn hàng bị lỗi, vui lòng kiểm tra kết nối mạng")
-            //     Cart['arr'] = null
-            //     localStorage.setItem("Cart", JSON.stringify(Cart))
-            //     setTimeout(function(){
-            //         location.reload()
-            //     },0)
-            // }
             
         }
         else {
@@ -133,6 +119,86 @@ class Cart extends BasicHome{
         this.setCartData();
         this.renderCart();
         this.updateCartCount();
+    }
+    NavigateToCheckout() {
+        $("#root").load("./pages/checkout.php", () =>{
+            var donhang = JSON.parse(localStorage.getItem("Cart"))
+            var tableTongDonHang = '<h5 class="font-weight-medium mb-3">Sản phẩm</h5>';
+            var tongHoaDon = 0;
+            donhang['arr'].forEach((item) => {
+                tableTongDonHang += `
+                    <div class="d-flex justify-content-between">
+                        <p>${item['TenSP']}</p>
+                        <p>${item['GiaSP']}</p>
+                    </div>
+                `;
+                tongHoaDon += item['GiaSP'] * item['soluong'];
+            });
+            tableTongDonHang += `
+                <hr class="mt-0">
+                <div class="d-flex justify-content-between mb-3 pt-1">
+                    <h6 class="font-weight-medium">Tổng tiền sản phẩm</h6>
+                    <h6 class="font-weight-medium" name="amount" id="amount">${tongHoaDon}</h6>
+                    <input type="hidden" name="amount" value="${tongHoaDon}">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <h6 class="font-weight-medium">Phí vận chuyển</h6>
+                    <h6 class="font-weight-medium">10</h6>
+                </div>
+            `;
+            $(".js_tongdonhang").html(tableTongDonHang);
+            $(".cart-total").text(tongHoaDon + 10);
+            $(".js_thanhtoan").on("click", (event) =>{
+                event.preventDefault();
+                if ($('#directcheck').is(':checked') || $('#bankCode').is(':checked')) {
+                    var account = this.Account;
+                    if(account && this.Cart){
+                    account['tong'] = this.tongHoaDon
+                    account['arr']=this.Cart['arr']
+                    console.log(account)
+                    var xhr = new XHR()
+                    xhr.connect('POST',"./backend/controllers/donhang.php?set",account)
+                    .then((data) =>{
+                        console.log(data)
+                        var ma_don_hang=data;
+                        if(ma_don_hang!=0){
+                            $('#vnp_TxnRef').val(ma_don_hang)
+                        }
+                        else 
+                            alert("Đơn hàng bị lỗi, vui lòng kiểm tra kết nối mạng")
+                    })
+                    }
+                    if ($('#bankCode').is(':checked')) {
+                        //Thanh toán bằng VNPay
+                        $("#form_checkout").submit()
+                        
+                    }
+                    else {
+                        this.Cart['arr'] = []
+                        this.setCartData()
+                        alert("Thanh toán thành công!")
+                        window.location.reload()
+                    }
+                }
+            });
+        });
+    }
+    deleteCart(){
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('payment')) {
+            window.location.href = "./index.php?cart";
+            const vnp_ResponseCode = urlParams.get('vnp_ResponseCode');
+            if (vnp_ResponseCode == 0) {
+                this.Cart['arr'] = [];
+                this.setCartData();
+                this.renderCart();
+                this.updateCartCount();
+                alert("Thanh toán thành công!")
+            }
+            else {
+                alert("Thanh toán không thành công!")
+            }
+        }
     }
 }
 const cart=new Cart()

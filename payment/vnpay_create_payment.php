@@ -10,7 +10,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
  */
 require_once("./config.php");
 
-$vnp_TxnRef = rand(1, 999); //Mã giao dịch thanh toán tham chiếu của merchant
+$vnp_TxnRef =  $_POST['vnp_TxnRef'];//Mã giao dịch thanh toán tham chiếu của merchant
 $vnp_Amount = $_POST['amount']; // Số tiền thanh toán
 $vnp_Locale = $_POST['language']; //Ngôn ngữ chuyển hướng thanh toán
 $vnp_BankCode = $_POST['bankCode']; //Mã phương thức thanh toán
@@ -57,4 +57,3 @@ if (isset($vnp_HashSecret)) {
 }
 header('Location: ' . $vnp_Url);
 die();
-

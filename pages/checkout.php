@@ -15,7 +15,7 @@
     <!-- Checkout Start -->
     <div class="checkout-container container-fluid pt-5">
         <div class="row px-xl-5">
-            <div class="col-lg-8">
+            <!-- <div class="col-lg-8">
                 <div class="mb-4">
                     <h4 class="font-weight-semi-bold mb-4">Thanh toán</h4>
                     <div class="row">
@@ -129,8 +129,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <form class="col-lg-4" method="post" action="../payment/vnpay_create_payment.php">
+            </div> -->
+            <form class="col-lg-6 mx-auto" method="post" action="./payment/vnpay_create_payment.php" id="form_checkout">
+                <input type="hidden" name="vnp_TxnRef" id="vnp_TxnRef">
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
                         <h4 class="font-weight-semi-bold m-0">Tổng đơn hàng</h4>
