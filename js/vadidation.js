@@ -104,7 +104,8 @@ function Validator(option){
                             case 'file':
                                 value[input.name]=input.files
                                 break
-                            default: value[input.name]=input.value
+                            default: 
+                                value[input.name]=input.value
                                 
                         }
                         return value
@@ -153,9 +154,10 @@ function Validator(option){
 Validator.isRequired=function(selector){
     return {
         selector,
-        test: (value)=>(
-            value ? undefined: 'Vui lòng nhập trường này'
-        )
+        test: (value)=>{
+            return value ? undefined: 'Vui lòng nhập trường này'
+        }
+        
     }
 }
 Validator.isEmail=function(selector){

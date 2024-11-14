@@ -23,7 +23,7 @@ $('input').on("input",() =>{
     $(".error-login").hide()
 })
 Validator({
-    form:'#form-dn',
+    form:'#form_login',
     rules:[
     Validator.isRequired('#user-login'),
     Validator.isSDT('#user-login'),
@@ -33,6 +33,7 @@ Validator({
     ],
     errorElement:'.form-message',
     onSubmit: (value) =>{
+        alert("cmmm")
         if(value){
             console.log(value)
             xhr=new XMLHttpRequest();
@@ -76,7 +77,6 @@ Validator({
     Validator.isRequired('#UserName'),
     Validator.isMaxLength('#UserName',25),
     Validator.isMinLength("#UserName",6),
-
     ],
     errorElement:'.form-message',
     onSubmit: (value) =>{

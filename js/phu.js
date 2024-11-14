@@ -7,7 +7,7 @@ class BasicHome{
         this.eventSearch();
     }
     updateCartCount() {
-        $(".js_numcart").text(this.Cart.arr.length);
+        $(".js_numcart").text(this.Cart?.arr?.length);
     }
     getCartData() {
         return this.Account.flag ? (JSON.parse(localStorage.getItem("Cart")) || { arr: [] }) : { arr: [] };

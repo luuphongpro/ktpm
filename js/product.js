@@ -49,3 +49,4 @@ class Product extends BasicHome{
     }
 }
 const product=new Product();
+console.log("check product")

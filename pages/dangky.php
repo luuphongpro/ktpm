@@ -11,7 +11,7 @@
             </li>
         </ul>
         <!-- LOGIN -->
-        <form action="" autocomplete="off" id="form-dn">
+        <form id="form_login">
             <div class="modal_content-login">
                 <div class="modal_content-input-box form-group">
                     <label for="user-login">Số điện thoại</label>
@@ -32,7 +32,7 @@
             </div>
         </form>
         <!-- REGISTER -->
-        <form action="" onsubmit="return checkForm()" autocomplete="off" id="form-dk">
+        <form id="form-dk">
             <div class="modal_content-register">
                 <div class="modal_content-input-box form-group">
                     <label for="SDT">Số điện thoại</label>

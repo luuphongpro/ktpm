@@ -98,4 +98,17 @@ class sanpham
         $this->conn->disconnect();
         return $array;
     }
+    function giam_soluong($masp,$soluong) {
+        $this->conn->constructor();
+        $strSQL="SELECT SoLuongSP FROM `sanpham` WHERE MaSP=$masp";
+        $result=$this->conn->excuteSQL($strSQL);
+        $row = mysqli_fetch_assoc($result);
+        if($row['SoLuongSP'] && $row['SoLuongSP']>0 && $row['SoLuongSP']>=$soluong){
+            $strSQL="UPDATE sanpham SET SoLuongSP = SoLuongSP - $soluong WHERE MaSP = $masp";
+            $result=$this->conn->excuteSQL($strSQL);
+            return $result ? true : false;
+        }
+        $this->conn->disconnect();
+        return false;
+    }
 }
