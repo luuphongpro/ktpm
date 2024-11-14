@@ -22,7 +22,7 @@ function Validator(option){
                         formElement.querySelector(rule.selector + ':checked')
                     )
                     break
-                // default: messErorr=rules[i](inputElement.value)
+                default: messErorr=rules[i](inputElement.value)
             }
             if(messErorr){
                 break
@@ -49,7 +49,7 @@ function Validator(option){
                         formElement.querySelector(rule.selector + ':checked')
                     )
                     break
-                // default: messErorr=rules[i](inputElement.value)
+                default: messErorr=rules[i](inputElement.value)
             }
             if(messErorr){
                 break
@@ -123,6 +123,7 @@ function Validator(option){
             //Lưu lại các rule cho từng input
             if(Array.isArray(selectorRules[rule.selector])){
                 selectorRules[rule.selector].push(rule.test)
+                console.log(selectorRules)
             }
             else {
                 selectorRules[rule.selector]=[rule.test]
