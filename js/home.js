@@ -28,13 +28,11 @@ Validator({
     Validator.isRequired('#user-login'),
     Validator.isSDT('#user-login'),
     Validator.isRequired('#password-login'),
-    Validator.isRequired('#password-login'),
     Validator.isMinLength('#password-login',6),
     ],
     errorElement:'.form-message',
     onSubmit: (value) =>{
         if(value){
-            console.log(value)
             xhr=new XMLHttpRequest();
             xhr.open('POST','./backend/controllers/xldangnhap.php');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
