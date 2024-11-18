@@ -34,12 +34,10 @@
                     <div class="col-md-4 mb-5">
                         <h5 class="font-weight-bold text-dark mb-4">Nhóm 10</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Phan Anh Dũng</a>
+                            <a class="text-dark mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Nguyễn Minh Phi</a>
                             <a class="text-dark mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Lê Văn Hoàng</a>
-                            <a class="text-dark mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Phan Duy Nhân
-                            </a>
+                            <a class="text-dark mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Nguyễn Thị Mai Vy</a>
                             <a class="text-dark mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Huỳnh Văn Phú</a>
-                            <a class="text-dark" href="#"><i class="fa fa-angle-right mr-2"></i>Trần Thanh</a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">

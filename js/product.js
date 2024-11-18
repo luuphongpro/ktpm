@@ -31,7 +31,7 @@ class Product extends BasicHome{
             alert("Phải đăng nhập mới có thể mua hàng")
     }
     logicCheckBox(){
-        const allCategoryCheckbox = $('#dm'); // Checkbox 'All Category'
+        const allCategoryCheckbox = $('#dm'); 
         const categoryCheckboxes = $('input[name="dm[]"]').not('#dm'); // Các checkbox danh mục con
 
         // Hàm chọn hoặc bỏ chọn tất cả các danh mục con khi tích vào All Category

@@ -129,11 +129,11 @@ $total = mysqli_fetch_assoc($result);
             <span class="price"><?= $product['GiaSP'] ?></span>
         </div>
         <div class="modal-footer-control">
-            <button class="button-dat" id="add-cart" onclick="AddCart(<?= $product['MaSP'] ?>)"><i class="fa-light fa-basket-shopping">Thêm giỏ hàng</i></button>
+            <button class="button-dat" id="add-cart" onclick="product.addCart(<?= $product['MaSP'] ?>)"><i class="fa-light fa-basket-shopping">Thêm giỏ hàng</i></button>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="js/home.js"></script>
+    <script src="js/product.js" defer></script>
 </body>
 
 </html>

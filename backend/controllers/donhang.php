@@ -30,4 +30,17 @@
         }
         echo json_encode($array);
     }
+    else if(isset($_REQUEST['getdon'])){
+        $data=$_REQUEST['mataikhoan'];
+        // $data=json_decode($data);
+        // echo $data;
+        $result=$donhang->timtheoSDT($data);
+        $array=[];
+        if(mysqli_num_rows($result)>0){
+            while($row=mysqli_fetch_assoc($result)){
+                $array[]=$row;
+            }
+        }
+        echo json_encode($array);
+    }
 ?>

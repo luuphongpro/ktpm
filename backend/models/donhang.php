@@ -28,7 +28,6 @@ class donhang
         LEFT JOIN sanpham ON chitietdonhang.MaSP = sanpham.MaSP
         LEFT JOIN donhang ON donhang.MaDonHang=chitietdonhang.MaDonHang
         WHERE  donhang.MaDonHang='" . $madon . "'";
-
         $result = $this->conn->excuteSQL($strSQL);
         $this->conn->disconnect();
         return $result;

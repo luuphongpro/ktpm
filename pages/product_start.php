@@ -32,7 +32,7 @@ if(isset($_GET['search_query'])){
 }
 else if(isset($_GET['price'])) {
     $price=$_GET['price'];
-    $dm=$_GET['dm'];
+    $dm=isset($_GET['dm']) ? $_GET['dm'] : ["all"];
     $data_sanpham=[];
     if($dm[0]=='all'){
         $result = $sanpham->dssanpham();
@@ -81,7 +81,7 @@ else {
             </div>
             <div class="card-footer d-flex justify-content-between bg-light border">
                 <!-- Nút Xem Nhanh -->
-                <a href="detail_product.php?id=<?php echo $sp['MaSP'] ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Xem nhanh</a>
+                <a href="index.php?detail_product&id=<?php echo $sp['MaSP'] ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Xem nhanh</a>
                 <!-- Nút Thêm vào Giỏ Hàng -->
                 <button class="btn btn-sm text-dark p-0" onclick="product.addCart(<?php echo $sp['MaSP'] ?>)"><i class="fas fa-shopping-cart text-primary mr-1" ></i>Thêm vào giỏ hàng</button>
             </div>
