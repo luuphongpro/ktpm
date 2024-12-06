@@ -12,7 +12,7 @@ $(".root").load("pages/admin.php",function(){
             errorElement:".form-message",
             onSubmit: function(value){
                 var xhr=new XMLHttpRequest();
-                xhr.open("GET","./backends/controllers/taikhoan.php?tim&user1_register="+value.user1_register+"&status=1");
+                xhr.open("GET","./backend/controllers/taikhoan.php?tim&user1_register="+value.user1_register+"&status=1");
                 xhr.send();
                 xhr.onload=function(){
                     if(xhr.status>=200 && xhr.status<300){  

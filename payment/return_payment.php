@@ -29,7 +29,7 @@ $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
 if ($secureHash == $vnp_SecureHash) {
     if ($_GET['vnp_ResponseCode'] == '00') {
         $donhang->update_payment($ma_don_hang,'1');
-        header("Location: http://localhost/clone%20web%20mypham/toichotoi-0.1.2/index.php?cart");
+        // header("Location: http://localhost/clone%20web%20mypham/toichotoi-0.1.2/index.php?cart");
     } 
     else {
         echo "GD Khong thanh cong";

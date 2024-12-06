@@ -37,7 +37,6 @@ function GetValue(){
     var xhr=new XHR()
     return xhr.connect(undefined,"./backend/controllers/nhaCC.php?hoadon")
     .then(function(data){
-        console.log(data)
         dataThongKe=JSON.parse(data)
     })
 }
@@ -159,7 +158,6 @@ function qlkho() {
     <ul class="list-group list-group-horizontal menu-container">
         <li class="list-group-item model-item">Danh sách sản phẩm</li>
         <li class="list-group-item model-item">Thêm sản phẩm</li>
-        <li class="list-group-item model-item " data-bs-toggle="modal" data-bs-target="#">Thêm thương hiệu</li>
         
     </ul>
     </div>
@@ -330,9 +328,9 @@ function qlncc() {
         }
     })
 }
+var dataPhieuNhap = {};
+var dataCTPN = [];
 function nhapkho() {
-    var dataPhieuNhap = {};
-    var dataCTPN = [];
     // $(".model-right.active").removeClass("active")
     // $(".model-qlkho").addClass("active")
     $(".content-wrapper").load("./backend/modules/nhapkho.php", function () {
@@ -342,11 +340,10 @@ function nhapkho() {
         });
         dataPhieuNhap['tongTien'] = 0;
         dataPhieuNhap['maNhanVien'] = '0123456789'
-
+        console.log(dataPhieuNhap)
         $(".them-phieunhap").click(function () {
             $(".item-nhapkho.pannel").slideToggle()
             $("#form-phieunhap").hide()
-            
         })
     })
 }
@@ -421,7 +418,6 @@ function setValueForm(event) {
             Validator.isNumber("#form_phieunhap-dongia"),
             Validator.isPositiveNumber("#form_phieunhap-dongia"),
             Validator.isGreaterThan("#form_phieunhap-dongia",1000),
-            Validator.isRequired("#form_phieunhap-hesolai"),
         ],
         errorElement: ".form-message",
         onSubmit: function (value) {
@@ -621,7 +617,7 @@ function handleDuyet(id) {
     }
 }
 function inHoaDon(id) {
-    $(".table-content").load("./backend/module/xlinhoadon.php?donhang&id=" + id, function () {
+    $(".table-content").load("./backend/controllers/xlinhoadon.php?donhang&id=" + id, function () {
         $(".print-pdf").click(function (e) {
             e.stopPropagation();
             window.open("./hoadon.php?donhang&id=" + id);

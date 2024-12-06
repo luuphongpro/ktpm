@@ -77,8 +77,7 @@
                     id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 205px">
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">Chăm sóc da <i
-                                    class="fa fa-angle-down float-right mt-1"></i></a>
+                            <a href="http://localhost/clone%20web%20mypham/toichotoi-0.1.2/index.php?product=&price=price-all&dm%5B%5D=1" class="nav-link" >Chăm sóc da </a>
                             <!-- <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                 <li>
                                     <a href="" class="dropdown-item">Làm sạch</a>
@@ -216,10 +215,9 @@
                                 </li>
                             </div> -->
                         </div>
-
+                        <a href="http://localhost/clone%20web%20mypham/toichotoi-0.1.2/index.php?product=&price=price-all&dm%5B%5D=4" class="nav-link" >Hoàng</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">Chăm sóc cơ thể <i
-                                    class="fa fa-angle-down float-right mt-1"></i></a>
+                            <a href="http://localhost/clone%20web%20mypham/toichotoi-0.1.2/index.php?product=&price=price-all&dm%5B%5D=3" class="nav-link" >Chăm sóc cơ thể </a>
                             <!-- <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                 <li>
                                     <a href="" class="dropdown-item">Làm sạch</a>
@@ -283,8 +281,7 @@
                             </div> -->
                         </div>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">Trang điểm <i
-                                    class="fa fa-angle-down float-right mt-1"></i></a>
+                            <a href="http://localhost/clone%20web%20mypham/toichotoi-0.1.2/index.php?product=&price=price-all&dm%5B%5D=2" class="nav-link" >Trang điểm </a>
                             <!-- <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                 <li>
                                     <a href="" class="dropdown-item">Mặt</a>
@@ -350,92 +347,8 @@
                             </div> -->
                         </div>
                         <!-- <a href="" class="nav-item nav-link">Sleepwear</a> -->
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">Nước hoa <i
-                                    class="fa fa-angle-down float-right mt-1"></i></a>
-                            <!-- <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <li>
-                                    <a href="" class="dropdown-item">Nước hoa toàn thân</a>
-                                    <div class="suboverlaymenu">
-                                        <div class="list-menu">
-
-                                            <ul>
-                                                <li>Eau De Parfum</li>
-                                                <li>Eau De Toilette</li>
-                                                <li>Nước hoa cơ thể</li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-
-                            </div> -->
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">Dụng cụ làm đẹp <i
-                                    class="fa fa-angle-down float-right mt-1"></i></a>
-                            <!-- <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <li>
-                                    <a href="" class="dropdown-item">Dành cho mặt</a>
-                                    <div class="suboverlaymenu">
-                                        <div class="list-menu">
-
-                                            <ul>
-                                                <li>Khẩu trang</li>
-                                                <li>Giấy thấm dầu</li>
-                                                <li>Bông tẩy trang</li>
-                                                <li>Dụng cụ chăm sóc mặt</li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <a href="" class="dropdown-item">Cọ trang điểm</a>
-                                    <div class="suboverlaymenu">
-                                        <div class="list-menu">
-
-                                            <ul>
-                                                <li>Cọ nền</li>
-                                                <li>Mút & dụng cụ trang điểm nền</li>
-                                                <li>Cọ môi</li>
-                                                <li>Cọ mắt</li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="" class="dropdown-item">Dụng cụ làm đẹp</a>
-                                    <div class="suboverlaymenu">
-                                        <div class="list-menu">
-
-                                            <ul>
-                                                <li>Nhíp</li>
-                                                <li>Uốn mi</li>
-                                                <li>Dũa và bấm móng tay</li>
-                                                <li>Gương</li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="" class="dropdown-item">Khác</a>
-                                    <div class="suboverlaymenu">
-                                        <div class="list-menu">
-
-                                            <ul>
-                                                <li>Nón tắm</li>
-                                                <li>Túi đựng mỹ phẩm</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-
-                            </div> -->
-                        </div>
+                        <!-- ? -->
+                        
                     </div>
                 </nav>
             </div>

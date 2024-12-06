@@ -22,7 +22,7 @@
                 <span class="form-message"></span>
             </div>
             <div class="modal_content-input-box form-group">
-                <label for="username-register">Tên đăng ký</label>
+                <label for="username-register">Tên người dùng</label>
                 <input type="text" placeholder="Nhập tên đăng ký" id="username-register" name="username_register">
                 <span class="form-message"></span>
             </div>

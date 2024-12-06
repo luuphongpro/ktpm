@@ -139,12 +139,6 @@
                     <p>Lập phiếu nhập kho</p>
                   </a>
                 </li>
-                <li class="nav-item js_trahang">
-                  <a class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lập phiếu trả hàng</p>
-                  </a>
-                </li>
                 <li class="nav-item js_thongkenhap">
                   <a class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
@@ -240,8 +234,10 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="dist/js/pages/dashboard.js"></script>
-  <script src="https://cdn.datatables.net/2.0.4/js/dataTables.js"></script>
-  <script src="https://cdn.datatables.net/2.0.4/js/dataTables.bootstrap5.js"></script>
+  <!-- <script src="https://cdn.datatables.net/2.0.4/js/dataTables.js"></script> -->
+  <script src="dist/js/dataTables.js"></script>
+  <script src="dist/js/dataTables.bootstrap5.js"></script>
+  <!-- <script src="https://cdn.datatables.net/2.0.4/js/dataTables.bootstrap5.js"></script> -->
   <script src="js/vadidation.js"></script>
   <script src="js/XMLHTTP.js"></script>
   <script src="js/admin1.js"></script>

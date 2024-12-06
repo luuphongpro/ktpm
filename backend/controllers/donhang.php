@@ -11,7 +11,6 @@
             foreach($data->arr as $item){
                 $flagChiTiet=$donhang->setChiTietDonHang($item);
                 $tmp = $sanpham->giam_soluong($item->MaSP,$item->soluong);
-                echo $tmp;
             }
         }
         else {

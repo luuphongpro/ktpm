@@ -159,26 +159,25 @@ class Cart extends BasicHome{
                     var xhr = new XHR()
                     xhr.connect('POST',"./backend/controllers/donhang.php?set",account)
                     .then((data) =>{
-                        console.log(data)
                         var ma_don_hang=data;
                         if(ma_don_hang!=0){
                             $('#vnp_TxnRef').val(ma_don_hang)
                         }
                         else 
                             alert("Đơn hàng bị lỗi, vui lòng kiểm tra kết nối mạng")
+                            if ($('#bankCode').is(':checked')) {
+                                $("#form_checkout").submit()
+                            }
+                            else {
+                                this.Cart['arr'] = []
+                                this.setCartData()
+                                alert("Thanh toán thành công!")
+                                window.location.reload()
+                            }
                     })
+                    
                     }
-                    if ($('#bankCode').is(':checked')) {
-                        //Thanh toán bằng VNPay
-                        $("#form_checkout").submit()
-                        
-                    }
-                    else {
-                        this.Cart['arr'] = []
-                        this.setCartData()
-                        alert("Thanh toán thành công!")
-                        window.location.reload()
-                    }
+                    
                 }
             });
         });
@@ -189,6 +188,7 @@ class Cart extends BasicHome{
             window.location.href = "./index.php?cart";
             const vnp_ResponseCode = urlParams.get('vnp_ResponseCode');
             if (vnp_ResponseCode == 0) {
+
                 this.Cart['arr'] = [];
                 this.setCartData();
                 this.renderCart();

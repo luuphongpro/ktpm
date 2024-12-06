@@ -22,7 +22,7 @@ function Validator(option){
                         formElement.querySelector(rule.selector + ':checked')
                     )
                     break
-                default: messErorr=rules[i](inputElement.value)
+                default: messErorr=rules[i](inputElement?.value)
             }
             if(messErorr){
                 break
@@ -42,6 +42,7 @@ function Validator(option){
         var messErorr
         var rules=selectorRules[rule.selector]
         for(var i=0;i<rules.length;i++){
+            console.log(inputElement)
             switch (inputElement?.type){
                 case 'radio':
                 case 'checkbox':
@@ -49,7 +50,7 @@ function Validator(option){
                         formElement.querySelector(rule.selector + ':checked')
                     )
                     break
-                default: messErorr=rules[i](inputElement.value)
+                default: messErorr=rules[i](inputElement?.value)
             }
             if(messErorr){
                 break
@@ -123,7 +124,6 @@ function Validator(option){
             //Lưu lại các rule cho từng input
             if(Array.isArray(selectorRules[rule.selector])){
                 selectorRules[rule.selector].push(rule.test)
-                console.log(selectorRules)
             }
             else {
                 selectorRules[rule.selector]=[rule.test]

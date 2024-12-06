@@ -92,7 +92,7 @@
                     <div class="position-relative" style="z-index: 1;">
                         <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
                         <h1 class="mb-4 font-weight-semi-bold">Chăm sóc da</h1>
-                        <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Xem ngay</a>
+                        <a href="http://localhost/clone%20web%20mypham/toichotoi-0.1.2/index.php?product=&price=price-all&dm%5B%5D=1" class="btn btn-outline-primary py-md-2 px-md-3">Xem ngay</a>
                     </div>
                 </div>
             </div>

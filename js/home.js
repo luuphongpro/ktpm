@@ -133,7 +133,7 @@ function LoginOption(level){
         html+=`<li><a class="option-item" href='admin.html'><i class="fa fa-book" aria-hidden="true"></i>Trang phân quyền</a></li>`
         html+=`<li><a class="option-item" href='admin1.php'><i class="fa fa-book" aria-hidden="true"></i>Vào trang Admin</a></li>`
     }
-    else {
+    else if (!level=="KH"){
         html+=`<li><a class="option-item" href='admin1.php'><i class="fa fa-book" aria-hidden="true"></i>Vào trang Admin</a></li>`
     }
     html+=`<li><a class="user-logout option-item" href="index.php?chon&id=home"><i class="fa fa-sign-out" aria-hidden="true"></i> Thoát</a></li>`

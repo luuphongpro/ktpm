@@ -38,7 +38,7 @@
                 $id = $_GET['id'];
                 echo " id = $id;";
                 echo "
-                $('#root').load('./pages/module/xlinhoadon.php?phieunhap&id=' + id, function(){
+                $('#root').load('./backend/controllers/xlinhoadon.php?phieunhap&id=' + id, function(){
                     $('.btn-loaddon').remove();
                     $('.print-pdf').text('In hóa đơn');
                     $('.print-pdf').click(function(){
@@ -53,7 +53,7 @@
                 $id = $_GET['id'];
                 echo " id = $id;";
                 echo "
-                    $('#root').load('./pages/module/xlinhoadon.php?donhang&id=' + id, function(){
+                    $('#root').load('./backend/controllers/xlinhoadon.php?donhang&id=' + id, function(){
                         $('.btn-loaddon').remove();
                         $('.print-pdf').text('In hóa đơn');
                         $('.print-pdf').click(function(){

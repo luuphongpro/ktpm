@@ -1,12 +1,11 @@
 <?php
 //Thư viện number-to-words
-require '../.././lib/vendor/autoload.php';
-require './controller.php';
-
+require '../models/donhang.php';
+require '../models/phieunhap.php';
+require '../../lib/vendor/autoload.php';
 use PHPViet\NumberToWords\Transformer;
-
 $transformer = new Transformer();
-$banhang = new banhang;
+$banhang = new donhang;
 $phieunhap=new phieunhap;
 function formatCurrency($price)
 {

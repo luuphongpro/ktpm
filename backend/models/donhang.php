@@ -74,7 +74,7 @@ class donhang
             FROM
                 donhang
             WHERE 
-                TrangThaiDonHang = '1' 
+                TrangThaiDonHang >= '1' 
                 AND YEAR(NgayDatHang) = YEAR(CURDATE()) -- Điều kiện chỉ lấy trong năm hiện tại
             GROUP BY MONTH(NgayDatHang); -- Nhóm theo tháng";
         $result = $this->conn->excuteSQL($sql);

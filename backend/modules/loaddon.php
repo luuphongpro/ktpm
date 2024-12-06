@@ -32,7 +32,7 @@
                 $to=$_GET['to'];
                 $strtmp="AND NgayDatHang BETWEEN '".$from."' AND '".$to."'";
             }
-            $strSQL="SELECT * FROM `donhang` WHERE TrangThaiDonHang='0' ".(!isset($_GET['status']) ? "OR TrangThaiDonHang='1'" : "").$strtmp;
+            $strSQL="SELECT * FROM `donhang` WHERE TrangThaiDonHang='2' OR TrangThaiDonHang='1'".(!isset($_GET['status']) ? "OR TrangThaiDonHang='0'" : "").$strtmp;
             $result=$conn->excuteSQL($strSQL);
         }
         $data="<div class='table-content m-2'><nav aria-label='breadcrumb'>
@@ -57,10 +57,10 @@
                 $data.="<tr id='".$row['MaDonHang']."'>
                 <td>".$row['MaDonHang']."</td>
                 <td>".$row['NgayDatHang']."</td>
-                <td class='tittle-status'>".($row['TrangThaiDonHang'] == "0" ? "Chưa duyệt" : "Đã duyệt")."</td>
+                <td class='tittle-status'>".($row['TrangThaiDonHang'] != "2" ? "Chưa duyệt" : "Đã duyệt")."</td>
                 <td>".$row['DiaChiGiaoHang']."</td>
                 <td>".formatCurrency($row['TongGiaTriDonHang'])." VNĐ</td>
-                <td><button class='button-duyet ".($row['TrangThaiDonHang'] == "0" ? "active" : "disabled")."' id_f='".$row['MaDonHang']."'>Duyệt đơn</button>
+                <td><button class='button-duyet ".($row['TrangThaiDonHang'] < "2" ? "active" : "disabled")."' id_f='".$row['MaDonHang']."'>Duyệt đơn</button>
                     <button class='button-in active' id_i='".$row['MaDonHang']."'>In hóa đơn</button>
                 </td>
                 </tr>";
@@ -151,7 +151,7 @@
                     }
                     echo 1;
                 }
-                $strSQL="UPDATE `donhang` SET `TrangThaiDonHang`='1' WHERE MaDonHang='".$id."'";
+                $strSQL="UPDATE `donhang` SET `TrangThaiDonHang`='2' WHERE MaDonHang='".$id."'";
                 $result=$conn->excuteSQL($strSQL);
             }
             else echo 0;
